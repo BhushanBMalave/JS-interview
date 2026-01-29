@@ -694,27 +694,17 @@ Waits for Call Stack to clear
 
 
 1️⃣ What is a Higher-Order Function?
-
 A Higher-Order Function (HOF) is a function that:
-
 Takes another function as an argument, OR
-
 Returns a function
-
 Because JavaScript has first-class functions, HOFs are possible.
 
 2️⃣ Why Higher-Order Functions?
-
 They help achieve:
-
 Code reusability
-
 Abstraction
-
 Clean & readable code
-
 Functional programming style
-
 Instead of repeating logic, we pass behavior.
 
 3️⃣ Problem Without HOFs (Bad Practice)
@@ -877,7 +867,6 @@ const youngNames = users.reduce((acc, curr) => {
 ✔ reduce can do map + filter
 
 14 ------ Callback Hell 
-
 Two issues while using callbacks
 
 1 - Callback hell
@@ -1058,7 +1047,6 @@ Promise.reject("Failed")
 11. If it returns a value => It will be  used as an argument in next function. If it is a promise then the next .then in the promise chain is attached to the promise returned by the current callback function.
 
 Homework:
-
 const cart = ['shoes', 'pants', 'kurta'];
 
 createOrder(cart)
@@ -1086,8 +1074,6 @@ createOrder(cart)
     console.log('No matter what happens, I will get executed');
   });
 
-
-
 function createOrder(cart) {
   const pr = new Promise(function(resolve, reject) {
     // create order
@@ -1105,7 +1091,6 @@ function createOrder(cart) {
       }, 5000)
     }
   });
-
   return pr;
 }
 
@@ -1853,6 +1838,7 @@ API Call with: Hello
 ✔ Only one API call, after 500ms of no typing.
 
 <input onkeyup="onTextChange(event.target.value)" />
+
 const getData = (value)=>{
  console.log(value)
 }
@@ -1867,7 +1853,7 @@ const debounce = (fn,delay) => {
  }
 }
 
-const onTextChange = debounce(getData,300);
+const onTextChange = debounce(getData,3000);
 
 24 ------ Throttling 
 
@@ -1938,10 +1924,201 @@ const throttle = (fn,delay) =>{
    if(lastcall){
     lastcall = false;
     setTimeout(() => {
-     handleClicked();
+     fn.apply(this, ...args)
      lastcall = true;
     },delay)
    }
  }
 }
 const buttonClicked = throttle(handleClicked,1000);
+
+25 ------  slice, splice and split
+
+1️⃣ slice() – Array / String
+📌 Purpose
+Used to extract a portion of an array or string without modifying the original.
+
+📌 Syntax
+array.slice(start, end)
+string.slice(start, end)
+
+start → starting index (inclusive)
+end → ending index (exclusive)
+Returns a new array / string
+
+📌 Example (Array)
+const arr = [10, 20, 30, 40, 50];
+
+const result = arr.slice(1, 4);
+console.log(result); // [20, 30, 40]
+console.log(arr);    // original array unchanged
+
+📌 Example (String)
+const str = "JavaScript";
+console.log(str.slice(0, 4)); // "Java"
+
+✅ Key Points
+Non-mutating
+Can use negative indexes
+
+arr.slice(-2); // last 2 elements
+
+2️⃣ splice() – Array only
+📌 Purpose
+Used to add, remove, or replace elements in an array.
+
+📌 Syntax
+array.splice(start, deleteCount, item1, item2, ...)
+
+start → index to begin
+deleteCount → number of elements to remove
+item1, item2 → elements to add
+Modifies the original array
+
+📌 Remove elements
+const arr = [1, 2, 3, 4, 5];
+
+arr.splice(1, 2);
+console.log(arr); // [1, 4, 5]
+
+📌 Add elements
+const arr = [1, 2, 5];
+
+arr.splice(2, 0, 3, 4);
+console.log(arr); // [1, 2, 3, 4, 5]
+
+📌 Replace elements
+const arr = [1, 2, 3];
+
+arr.splice(1, 1, 99);
+console.log(arr); // [1, 99, 3]
+
+✅ Key Points
+Mutating method
+Very powerful but should be used carefully
+
+3️⃣ split() – String only
+📌 Purpose
+Used to convert a string into an array based on a separator.
+
+📌 Syntax
+string.split(separator, limit)
+
+separator → character or regex
+limit → number of splits (optional)
+Returns a new array
+
+📌 Example
+const str = "HTML,CSS,JS";
+
+const result = str.split(",");
+console.log(result); // ["HTML", "CSS", "JS"]
+
+📌 Split by space
+const sentence = "I love JavaScript";
+
+console.log(sentence.split(" "));
+// ["I", "love", "JavaScript"]
+
+📌 Split into characters
+"hello".split("");
+// ["h", "e", "l", "l", "o"]
+
+🔴 Differences (Very Important for Interviews)
+Method	   Works On	           Modifies Original	         Use Case
+slice()	   Array, String	     ❌                          No	Extract part
+splice()	 Array only	         ✅ Yes	                    Add / Remove / Replace
+split()	   String only	       ❌ No	                      String → Array
+
+🧠 Interview Tip
+slice → safe, splice → dangerous, split → string helper
+
+
+26 ------  setTimeout and setInterval 
+
+1️⃣ setTimeout()
+📌 Purpose
+Executes a function once after a specified delay.
+
+📌 Syntax
+setTimeout(callback, delay, ...args)
+
+callback → function to execute
+delay → time in milliseconds
+Runs only one time
+
+📌 Example
+setTimeout(() => {
+  console.log("Executed after 2 seconds");
+}, 2000);
+
+📌 Clear Timeout
+const timerId = setTimeout(() => {
+  console.log("This will not run");
+}, 3000);
+
+clearTimeout(timerId);
+
+2️⃣ setInterval()
+📌 Purpose
+Executes a function repeatedly at fixed time intervals.
+
+📌 Syntax
+setInterval(callback, delay, ...args)
+
+Executes again and again after every delay
+
+📌 Example
+const intervalId = setInterval(() => {
+  console.log("Runs every 1 second");
+}, 1000);
+
+📌 Clear Interval
+clearInterval(intervalId);
+
+🔴 Key Differences (Important for Interviews)
+Feature	          setTimeout	         setInterval
+Execution	        Runs once	           Runs repeatedly
+Use case	        Delayed task	       Repeated task
+Stops automatically	✅ Yes	           ❌ No (must clear)
+Clear method	    clearTimeout()	     clearInterval()
+Risk	               Low	             Can cause memory leaks if not cleared
+
+⚠️ Important Behavior (Advanced Point)
+⏳ Delay is minimum, not guaranteed
+Both methods wait for the call stack to be empty before execution.
+
+setTimeout(() => console.log("Timeout"), 0);
+console.log("Sync code");
+
+// Output:
+// Sync code
+// Timeout
+
+🔁 Better Alternative to setInterval (Interview Favorite)
+Using setTimeout recursively avoids overlap issues 👇
+
+function runTask() {
+  console.log("Runs safely every second");
+
+  setTimeout(runTask, 1000);
+}
+
+runTask();
+
+✔ Prevents task overlap
+✔ More control than setInterval
+
+🧠 When to Use What?
+✅ Use setTimeout
+One-time delay
+Retry logic
+Deferred execution
+
+✅ Use setInterval
+Clocks
+Polling APIs
+Animations (basic)
+
+🎯 One-Line Interview Answer
+setTimeout runs once after a delay, while setInterval runs repeatedly at fixed intervals until cleared.
