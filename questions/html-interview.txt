@@ -1,0 +1,1472 @@
+📌 1️⃣ What is HTML?
+HTML (HyperText Markup Language) is the standard markup language used to create and structure web pages.
+
+Key Points:
+Defines structure, not logic
+Uses tags and elements
+Works with CSS (styling) and JavaScript (behavior)
+
+Example:
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Page</title>
+  </head>
+  <body>
+    <h1>Welcome</h1>
+    <p>This is HTML</p>
+  </body>
+</html>
+
+
+📌 Interview one-line answer:
+HTML is a markup language used to structure content on the web using tags and elements.
+
+📌 2️⃣ Difference between HTML and HTML5
+Feature	                    HTML	                    HTML5
+Version	                    Older standard	          Latest standard
+Doctype	                    Long & complex	          Simple
+Semantic tags	              ❌ Not available	       ✅ Available
+Multimedia	                 ❌ Needs Flash	         ✅ Native support
+Graphics	                   ❌ Limited	             ✅ Canvas & SVG
+Storage	                    Cookies only	            Local & Session Storage
+Mobile support	             ❌ Poor	                ✅ Mobile friendly
+Performance	                Slower	                  Faster
+
+🔹 Doctype Difference
+HTML:
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+
+HTML5:
+<!DOCTYPE html>
+
+🔹 Semantic Tags (HTML5 only)
+<header>
+<nav>
+<section>
+<article>
+<footer>
+
+🔹 Multimedia Support (HTML5)
+<video controls>
+  <source src="video.mp4">
+</video>
+
+<audio controls>
+  <source src="audio.mp3">
+</audio>
+
+
+📌 Interview answer:
+HTML5 is the advanced version of HTML that supports multimedia, semantic elements, mobile optimization, and modern APIs.
+
+📌 3️⃣ Advantages of HTML5
+✅ 1. Semantic Elements
+Improves SEO, accessibility, and readability.
+
+<article>
+  <h2>News</h2>
+  <p>Latest updates</p>
+</article>
+
+✅ 2. Native Audio & Video
+No need for Flash or plugins.
+
+<video controls>
+  <source src="movie.mp4">
+</video>
+
+✅ 3. Mobile-Friendly & Responsive
+Works smoothly on mobile devices.
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+✅ 4. Local Storage & Session Storage
+Stores data on browser.
+
+localStorage.setItem("user", "Bhushan");
+
+✅ 5. Canvas & SVG (Graphics)
+Used for games, charts, animations.
+
+<canvas id="myCanvas"></canvas>
+
+✅ 6. Better Performance
+Faster loading
+Reduced HTTP requests
+
+✅ 7. Offline Browsing
+Supports offline web applications.
+
+✅ 8. Improved Forms
+New input types improve UX.
+
+<input type="email">
+<input type="date">
+<input type="range">
+
+✅ 9. Cross-Browser Compatibility
+Works consistently across modern browsers.
+
+✅ 10. Cleaner & Simpler Code
+Easy to read and maintain.
+
+📌 Quick Interview Summary (Perfect Answer)
+What is HTML?
+HTML is a markup language used to structure web pages.
+
+Difference between HTML and HTML5?
+HTML5 is the latest version that supports semantic elements, multimedia, local storage, and mobile optimization.
+
+Advantages of HTML5?
+Semantic tags, audio/video support, better performance, mobile friendliness, offline storage, and cleaner code.
+
+
+📌 What is the role of DOCTYPE in HTML?
+The DOCTYPE (Document Type Declaration) tells the web browser which version of HTML the page is written in and how to render the page correctly.
+
+🔹 Why DOCTYPE is important?
+Defines HTML version
+Prevents browser quirks mode
+Ensures standard-compliant rendering
+Improves cross-browser consistency
+
+🔹 Example of DOCTYPE (HTML5)
+<!DOCTYPE html>
+
+📌 This declaration tells the browser:
+“This document uses HTML5 standards.”
+
+🔹 What happens without DOCTYPE?
+Browser enters Quirks Mode
+Page may render differently across browsers
+CSS layout issues can occur
+Older browser behaviors are used
+
+
+📌 Difference between <head> and <body> in HTML
+(with JS placement – interview-ready explanation)
+
+🔹 <head> vs <body> – Core Difference
+<head>	<body>
+Contains metadata	Contains visible content
+Not shown on page	Shown on the page
+Helps browser & SEO	Helps users
+Loads before body	Rendered after head
+
+🔹 <head> Tag – What goes inside?
+The <head> section contains information about the document, not the content itself.
+
+Common elements in <head>:
+<head>
+  <title>My Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HTML tutorial">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+Purpose of <head>:
+✔ SEO
+✔ Browser configuration
+✔ Responsive design
+✔ Linking CSS & JS
+
+🔹 <body> Tag – What goes inside?
+The <body> contains everything visible to the user.
+
+Example:
+<body>
+  <h1>Welcome</h1>
+  <p>This content is visible</p>
+  <button>Click Me</button>
+</body>
+
+🔹 Key Difference in One Line (Interview)
+The <head> contains metadata and resource links, while the <body> contains the visible content of the webpage.
+
+📌 Where to place JavaScript link reference?
+There are three correct ways, but one is recommended.
+
+✅ 1️⃣ Best Practice – JS at the end of <body> (Recommended)
+<body>
+  <h1>Hello</h1>
+  <script src="script.js"></script>
+</body>
+
+Why best?
+✔ HTML loads first
+✔ Faster page rendering
+✔ No DOM errors
+
+📌 Most common interview answer
+✅ 2️⃣ JS in <head> using defer (Modern & Recommended)
+<head>
+  <script src="script.js" defer></script>
+</head>
+
+How defer works:
+Downloads JS in parallel
+
+Executes after HTML is parsed
+✔ Clean
+✔ No blocking
+
+⚠️ 3️⃣ JS in <head> without defer (Not recommended)
+<head>
+  <script src="script.js"></script>
+</head>
+
+❌ Blocks HTML parsing
+❌ Slower page load
+
+🔹 defer vs async (Interview Bonus)
+defer	                            async
+Executes after HTML parsing	      Executes immediately
+Maintains order	                  Order not guaranteed
+Best for DOM scripts	             Best for analytics
+
+📌 Interview-Perfect Answer (Short)
+Difference between head and body:
+The head contains metadata and resource links, while the body contains visible content.
+
+Where to place JS?
+JavaScript should be placed at the end of the body or in the head using the defer attribute for better performance.
+
+🔥 Common Interview Trap
+❓ Can JS be placed in both head and body?
+✔ Yes, but placement affects performance.
+
+
+
+📌 What is the <title> tag in HTML?
+The <title> tag defines the title of a web page.
+It is displayed in:
+Browser tab
+Bookmarks
+Search engine results (SEO)
+
+📌 The <title> tag is placed inside the <head> section.
+✅ Example
+<head>
+  <title>HTML Interview Questions | Edureka</title>
+</head>
+
+🔹 Where does the title appear?
+Browser tab
+Search engine results page (SERP)
+Bookmarks / history
+
+📌 4 Advantages of the <title> Tag
+1️⃣ Improves SEO (Search Engine Optimization)
+Search engines use the title tag to understand page content.
+It is a ranking factor.
+📌 A well-written title improves visibility on Google.
+
+2️⃣ Increases Click-Through Rate (CTR)
+The title is the main clickable text in search results.
+A clear title attracts more users.
+
+✅ Example:
+
+<title>Top 30 HTML CSS Interview Questions – Explained</title>
+
+3️⃣ Better User Experience
+Users can easily identify the page from browser tabs.
+Helpful when multiple tabs are open.
+📌 Without a title, browser shows Untitled Document.
+
+4️⃣ Helps in Bookmarking & History
+The title is used as the default name when bookmarking a page.
+Makes saved pages easy to recognize later.
+
+🔹 Important Rules of <title> Tag (Interview Points)
+✔ Only one <title> per page
+✔ Must be inside <head>
+✔ Should be 50–60 characters
+✔ Should be unique for each page
+
+📌 One-Line Interview Answer
+The title tag defines the page title shown in browser tabs and search results, and it improves SEO, user experience, and click-through rates.
+
+
+📌 HTML <meta> Tag – Detailed Notes
+1️⃣ What is the <meta> tag?
+The <meta> tag provides metadata about an HTML document.
+
+📌 Metadata = data about data
+It is not visible on the webpage but is used by:
+Browsers
+Search engines
+Screen readers
+Social media platforms
+
+2️⃣ Where is the <meta> tag used?
+Meta tags are always placed inside the <head> section.
+<head>
+  <meta charset="UTF-8">
+</head>
+
+3️⃣ Why are meta tags important?
+✔ SEO (search engine optimization)
+✔ Responsive design
+✔ Character encoding
+✔ Browser compatibility
+✔ Social media sharing
+
+4️⃣ Commonly Used Meta Tags (With Examples)
+🔹 1. charset Meta Tag
+Defines character encoding of the webpage.
+<meta charset="UTF-8">
+Why UTF-8?
+Supports all languages
+Avoids text corruption
+
+📌 Interview point:
+Always place it first inside <head>.
+
+🔹 2. viewport Meta Tag (VERY IMPORTANT)
+Used for responsive design.
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+Explanation:
+Property	Meaning
+width=device-width	Match screen width
+initial-scale=1.0	Zoom level
+
+📌 Without this, mobile pages look zoomed out.
+
+🔹 3. description Meta Tag
+Used by search engines to display page summary.
+<meta name="description" content="Learn HTML meta tags with examples">
+✔ Improves click-through rate
+❌ Does not directly affect ranking
+
+🔹 4. keywords Meta Tag (Deprecated)
+Previously used for SEO.
+<meta name="keywords" content="HTML, CSS, JavaScript">
+📌 Modern browsers & Google ignore it.
+
+🔹 5. author Meta Tag
+Defines the author of the document.
+<meta name="author" content="Bhushan Malave">
+
+🔹 6. robots Meta Tag
+Controls search engine crawling behavior.
+<meta name="robots" content="index, follow">
+
+Common values:
+Value	Meaning
+index	Allow indexing
+noindex	Block indexing
+follow	Follow links
+nofollow	Don’t follow links
+
+📌 Example:
+<meta name="robots" content="noindex, nofollow">
+
+🔹 7. http-equiv Meta Tag
+Used to simulate HTTP headers.
+Example – Refresh Page:
+<meta http-equiv="refresh" content="5">
+
+🔁 Refreshes page every 5 seconds
+
+Example – Redirect:
+<meta http-equiv="refresh" content="5; url=https://example.com">
+
+🔹 8. Content-Type (Old way – not recommended)
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+✔ Replaced by:
+<meta charset="UTF-8">
+
+🔹 9. Compatibility Meta Tag (IE)
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+📌 Forces latest rendering engine in Internet Explorer.
+
+🔹 10. Open Graph Meta Tags (Social Media)
+Used for Facebook, LinkedIn, WhatsApp previews.
+
+<meta property="og:title" content="HTML Meta Tags">
+<meta property="og:description" content="Complete guide to meta tags">
+<meta property="og:image" content="image.png">
+<meta property="og:url" content="https://example.com">
+
+🔹 11. Twitter Card Meta Tags
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Meta Tags Explained">
+
+5️⃣ Full Example of Meta Tags in <head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HTML Meta Tag Tutorial">
+  <meta name="author" content="Bhushan Malave">
+  <meta name="robots" content="index, follow">
+  <title>Meta Tags</title>
+</head>
+
+6️⃣ Meta Tag Interview Questions (Most Asked)
+🔸 What is meta tag?
+
+Metadata about HTML document.
+🔸 Is meta tag visible?
+❌ No
+
+🔸 Where is meta tag placed?
+Inside <head>
+
+🔸 Which meta tag is important for mobile?
+viewport
+
+🔸 Does meta description affect SEO ranking?
+❌ No (but improves CTR)
+
+🔸 Can multiple meta tags be used?
+✔ Yes
+
+7️⃣ Best Practices
+✔ Use UTF-8 charset
+✔ Always add viewport
+✔ Write meaningful descriptions
+✔ Avoid deprecated keywords tag
+✔ Keep description under 160 characters
+
+8️⃣ One-Line Interview Answer (Quick)
+Meta tags provide metadata about an HTML document, helping browsers, search engines, and devices understand how to display and index the webpage.
+
+
+
+Q1. What are HTML Elements? What is the difference between Element & Tag?
+🔹 HTML Element
+An HTML element consists of:
+Opening tag
+Content
+Closing tag
+
+<p>This is a paragraph</p>
+➡ This entire structure is an element.
+
+🔹 HTML Tag
+A tag is just the markup keyword inside angle brackets.
+<p>     </p>
+
+✅ Difference between Element and Tag
+Element	               Tag
+Complete structure	    Only markup
+Includes content	      No content
+Has meaning	           Just syntax
+
+📌 Interview line:
+A tag defines an element, but an element includes both the tag and its content.
+
+Q2. What are the roles and uses of the <div> element in HTML?
+🔹 <div> (Division Element)
+A block-level element
+Used as a container
+Has no semantic meaning
+
+✅ Uses of <div>
+✔ Layout structure
+✔ Grouping elements
+✔ Styling with CSS
+✔ JS manipulation
+
+Example:
+<div class="card">
+  <h2>Title</h2>
+  <p>Description</p>
+</div>
+
+📌 Interview point:
+<div> is used when no semantic tag fits.
+
+Q3. Difference between <div> and <span> element
+<div>	                        <span>
+Block-level	                  Inline
+Full width	                   Content width
+Used for layout	              Used for text
+Starts new line	              No new line
+Example:
+<div>This is block</div>      <span>This is inline</span>
+
+Q4. Role of <p>, <a>, <br>, <hr>, <em>, <img>, <input>, <button>
+🔹 <p> – Paragraph
+<p>This is a paragraph</p>
+
+🔹 <a> – Anchor (Link)
+<a href="https://google.com">Google</a>
+
+🔹 <br> – Line Break
+Line 1<br>Line 2
+
+🔹 <hr> – Horizontal Rule
+<hr>
+Creates a thematic break.
+
+🔹 <em> – Emphasis
+<em>Important text</em>
+✔ Semantic
+✔ Screen readers emphasize it
+
+🔹 <img> – Image
+<img src="logo.png" alt="Company Logo">
+
+🔹 <input> – User Input
+<input type="text" placeholder="Name">
+
+🔹 <button> – Button
+<button>Submit</button>
+
+Q5. Role of <header>, <main>, <section>, <footer>, <address>
+🔹 <header>
+Introductory content.
+<header>
+  <h1>Website</h1>
+</header>
+
+🔹 <main>
+Main content of page (only once).
+<main>
+  <article>Content</article>
+</main>
+
+🔹 <section>
+Grouped related content.
+<section>
+  <h2>Features</h2>
+</section>
+
+🔹 <footer>
+Footer content.
+<footer>
+  © 2026 Company
+</footer>
+
+🔹 <address>
+Contact information.
+<address>
+  Email: info@example.com
+</address>
+
+📌 SEO & Accessibility friendly
+
+Q6. Role of Heading Tags in HTML & SEO Impact
+🔹 Heading Tags
+<h1>Main Heading</h1>
+<h2>Sub Heading</h2>
+<h3>Section</h3>
+
+SEO Impact:
+✔ Defines page structure
+✔ Helps search engines understand content
+✔ Improves accessibility
+
+📌 Best Practice:
+Use one <h1> per page
+Maintain proper hierarchy
+
+Q7. Difference between <section> and <article> (Important)
+<section>	                    <article>
+Groups related content	       Self-contained content
+Depends on context	           Independent
+Needs heading	                Can stand alone
+
+Example:
+<section>
+  <h2>News</h2>
+  <article>
+    <h3>Article Title</h3>
+    <p>Content</p>
+  </article>
+</section>
+
+
+📌 Interview trick:
+If content can be reused independently → <article>
+If content is grouped → <section>
+
+🔥 Quick Interview Summary
+Element ≠ Tag
+<div> = container, <span> = inline
+Semantic tags improve SEO
+Headings structure content
+<article> is reusable, <section> is grouping
+
+
+Q1. What are Root, Parent, Child & Nested Elements?
+🔹 Root Element
+The root element is the top-most element of an HTML document.
+<html>
+  ...
+</html>
+📌 <html> is the root element.
+
+🔹 Parent Element
+An element that contains another element.
+<body>
+  <p>Hello</p>
+</body>
+➡ <body> is the parent of <p>.
+
+🔹 Child Element
+An element inside another element.
+<p>Hello</p>
+➡ <p> is a child of <body>.
+
+🔹 Nested Elements
+Elements placed inside other elements.
+<div>
+  <p>
+    <span>Text</span>
+  </p>
+</div>
+➡ <span> is nested inside <p>, which is nested inside <div>.
+
+📌 Interview line:
+HTML elements can be nested to form a document tree structure.
+
+Q2. What are Empty Elements?
+🔹 Empty Elements
+HTML elements that do not have content or closing tags.
+
+Examples:
+<br>
+<hr>
+<img src="image.png">
+<input type="text">
+<meta>
+<link>
+
+📌 Also called void elements.
+
+Q3. What are Semantic Elements in HTML?
+🔹 Semantic Elements
+Elements that clearly describe their meaning to browsers, developers, and screen readers.
+
+Examples:
+<header>
+<nav>
+<main>
+<section>
+<article>
+<footer>
+
+Benefits:
+✔ Better SEO
+✔ Better accessibility
+✔ Clean code
+
+📌 Interview answer:
+Semantic elements describe the purpose of the content, not just its appearance.
+
+Q4. Can HTML tags be written in Uppercase?
+✅ Yes, but NOT recommended
+<P>Paragraph</P>
+
+✔ HTML is case-insensitive
+❌ XHTML is case-sensitive
+
+📌 Best Practice:
+Always use lowercase tags.
+
+Q5. What are the 3 differences between Block-Level & Inline Elements?
+Feature	Block-Level	Inline
+Width	Full width	Content width
+New Line	Starts on new line	Same line
+Size Control	Width & height allowed	Not allowed
+Examples:
+<div>Block</div>
+<span>Inline</span>
+
+Q6. List all Block-Level & Inline Elements in HTML
+🔹 Block-Level Elements (Common)
+<div>
+<p>
+<h1> to <h6>
+<header>
+<footer>
+<section>
+<article>
+<nav>
+<main>
+<ul>
+<ol>
+<li>
+<table>
+<form>
+
+🔹 Inline Elements (Common)
+<span>
+<a>
+<img>
+<input>
+<label>
+<em>
+<strong>
+<b>
+<i>
+<small>
+<br>
+
+🔥 Interview Quick Summary
+Root → <html>
+Empty elements → No closing tag
+Semantic elements → Meaningful tags
+HTML tags → Case-insensitive
+Block → Full width, new line
+Inline → Same line, content width
+
+
+Q1. What are HTML Attributes? What are the Types of HTML Attributes?
+🔹 What are HTML Attributes?
+HTML attributes provide additional information about an element.
+They are written in the opening tag as name="value" pairs.
+
+Example:
+<img src="logo.png" alt="Company Logo">
+
+🔹 Types of HTML Attributes
+1️⃣ Global Attributes
+Can be used on any HTML element.
+
+Examples:
+id
+class
+style
+title
+hidden
+data-*
+
+2️⃣ Element-Specific Attributes
+Work only on certain elements.
+
+Examples:
+href   → <a>
+src    → <img>
+type   → <input>
+alt    → <img>
+
+3️⃣ Boolean Attributes
+Do not need a value.
+
+Examples:
+<input disabled>
+<input checked>
+<input required>
+
+4️⃣ Event Attributes
+Used to handle events (not recommended inline).
+
+Examples:
+<button onclick="submitForm()">Submit</button>
+
+📌 Interview line:
+Attributes add extra information or behavior to HTML elements.
+
+Q2. What are the id, style & class attributes? When to use what?
+🔹 id Attribute
+Unique identifier
+Used for JavaScript & CSS targeting
+
+<div id="header"></div>
+
+✔ Only one element
+✔ Used when uniqueness is required
+
+🔹 class Attribute
+Used to style multiple elements
+
+Reusable
+<p class="text-red">Text</p>
+
+✔ Preferred for CSS
+✔ Multiple elements allowed
+
+🔹 style Attribute
+Inline CSS
+Applies to single element only
+
+<p style="color:red;">Text</p>
+
+❌ Not recommended
+✔ Overrides CSS rules
+
+🔹 When to use what?
+Attribute	When to Use
+id	Unique element, JS
+class	Reusable styles
+style	Quick override (avoid)
+
+Q3. What will happen if two elements have the same id?
+❌ Invalid HTML
+<div id="box"></div>
+<p id="box"></p>
+
+Problems:
+Breaks HTML standards
+JavaScript selects only first element
+CSS becomes unpredictable
+
+📌 Interview answer:
+IDs must be unique; duplicate IDs can cause DOM and styling issues.
+
+Q4. How to specify Multiple Classes for a single element? What is the style precedence?
+🔹 Multiple Classes Example
+<div class="card highlight shadow"></div>
+
+✔ Separate classes with space
+
+🔹 Style Precedence (CSS Priority)
+Highest → Lowest
+Inline styles
+ID selector
+Class selector
+Element selector
+Browser default
+
+Example:
+#box { color: red; }
+.box { color: blue; }
+div { color: green; }
+
+➡ Result: Red (ID wins)
+
+📌 !important overrides all (avoid using).
+
+Q5. What are Data Attributes in HTML?
+🔹 Data Attributes (data-*)
+Used to store custom data on HTML elements.
+
+Syntax:
+data-anyname="value"
+
+Example:
+<button data-id="101" data-user="admin">Click</button>
+
+🔹 Accessing Data Attributes (JavaScript)
+const btn = document.querySelector('button');
+console.log(btn.dataset.id);     // 101
+console.log(btn.dataset.user);   // admin
+
+🔹 Advantages:
+✔ No custom JS variables needed
+✔ Clean HTML
+✔ Useful in React / JS apps
+
+📌 Interview answer:
+Data attributes allow storing custom data in HTML elements without affecting structure or styling.
+
+
+Q1. What are the 5 Types of Links in HTML?
+HTML links are created using the <a> (anchor) tag.
+
+🔹 1️⃣ External Links
+Links to another website.
+
+<a href="https://www.google.com">Google</a>
+
+🔹 2️⃣ Internal Links
+Links to another page within the same website.
+
+<a href="about.html">About Us</a>
+
+🔹 3️⃣ Bookmark / Anchor Links
+Links to a specific section of the same page.
+
+<a href="#contact">Go to Contact</a>
+
+🔹 4️⃣ Email Links
+Opens default email client.
+
+<a href="mailto:info@example.com">Email Us</a>
+
+🔹 5️⃣ Phone Links
+Used mostly on mobile devices.
+
+<a href="tel:+919876543210">Call Us</a>
+
+📌 Interview line:
+HTML supports external, internal, bookmark, email, and phone links.
+
+Q2. What is the difference between Absolute & Relative URLs?
+Absolute URL	      Relative URL
+Full path	         Partial path
+Includes domain	   No domain
+Works everywhere	  Depends on file location
+
+Examples:
+Absolute URL
+<a href="https://example.com/about.html">About</a>
+
+Relative URL
+<a href="about.html">About</a>
+
+📌 Interview answer:
+Absolute URLs specify the complete address, while relative URLs are based on the current file location.
+
+Q3. What is the purpose of the <nav> element in HTML?
+The <nav> element defines a section of navigation links.
+
+Example:
+<nav>
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+  <a href="/contact">Contact</a>
+</nav>
+
+Benefits:
+✔ Semantic meaning
+✔ Improves SEO
+✔ Helps screen readers
+
+📌 Interview point:
+<nav> should contain major navigation links.
+
+Q4. What is a Fragment Identifier in a URL?
+A fragment identifier points to a specific section within a webpage.
+
+Syntax:
+#section-id
+
+Example:
+<a href="#features">Go to Features</a>
+
+<section id="features">
+  <h2>Features</h2>
+</section>
+
+
+📌 Interview answer:
+A fragment identifier navigates to a specific part of a page using an element’s ID.
+
+Q5. What is the purpose of the <base> element in HTML?
+The <base> element defines a base URL for all relative links in a document.
+
+Example:
+<head>
+  <base href="https://example.com/">
+</head>
+
+<a href="about.html">About</a>
+
+➡ This resolves to:
+https://example.com/about.html
+
+📌 Rules:
+✔ Only one <base> tag per page
+✔ Must be inside <head>
+
+Q6. How do you add an external stylesheet in HTML?
+Using the <link> tag inside <head>.
+
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+📌 Best practice: Use external CSS for maintainability.
+
+Q7. How do you open a link in a new tab?
+Using the target="_blank" attribute.
+
+<a href="https://google.com" target="_blank">Google</a>
+
+📌 Security best practice:
+<a href="https://google.com" target="_blank" rel="noopener noreferrer">
+  Google
+</a>
+
+Q8. How do you create an Email Link?
+Using mailto:.
+
+<a href="mailto:support@example.com">Send Email</a>
+
+With subject:
+<a href="mailto:support@example.com?subject=Help">
+  Contact Support
+</a>
+
+🔥 Quick Interview Summary
+<a> creates links
+Absolute = full URL
+Relative = local path
+<nav> = navigation links
+Fragment = #id
+<base> sets default URL
+CSS via <link>
+New tab via _blank
+Email via mailto:
+
+
+Q1. What are the different Types of Lists in HTML?
+HTML supports 3 main types of lists.
+
+🔹 1️⃣ Ordered List (<ol>)
+Displays items in numbered order.
+
+<ol>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>JavaScript</li>
+</ol>
+
+📌 Use when order matters.
+
+🔹 2️⃣ Unordered List (<ul>)
+Displays items with bullets.
+
+<ul>
+  <li>Apple</li>
+  <li>Banana</li>
+</ul>
+
+📌 Use when order does not matter.
+
+🔹 3️⃣ Description List (<dl>)
+Used for terms and descriptions.
+
+<dl>
+  <dt>HTML</dt>
+  <dd>Markup Language</dd>
+</dl>
+
+Q2. What is a Nested List in HTML?
+A nested list is a list inside another list.
+
+Example:
+<ul>
+  <li>Frontend
+    <ul>
+      <li>HTML</li>
+      <li>CSS</li>
+    </ul>
+  </li>
+</ul>
+
+📌 Common in menus & outlines.
+
+**Q3. What are <table>, <tr>, <th>, <td> elements?
+What are table advantages & disadvantages?**
+🔹 Table Elements
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>25</td>
+  </tr>
+</table>
+
+Element	Role
+<table>	Table container
+<tr>	Table row
+<th>	Header cell
+<td>	Data cell
+
+✅ Advantages of Tables
+✔ Best for tabular data
+✔ Easy to read data
+✔ Structured rows & columns
+
+❌ Disadvantages of Tables
+❌ Not responsive by default
+❌ Not for page layout
+❌ Complex styling
+
+📌 Interview note:
+Tables should be used only for data, not layouts.
+
+Q4. What is the colspan attribute in HTML?
+colspan allows a table cell to span multiple columns.
+
+Example:
+<table border="1">
+  <tr>
+    <th colspan="2">User Info</th>
+  </tr>
+  <tr>
+    <td>Name</td>
+    <td>Age</td>
+  </tr>
+</table>
+
+📌 Interview answer:
+colspan merges two or more columns into one cell.
+
+Q5. What is the best way to add a border to a table, column, and cell?
+❌ Old way (Not recommended)
+<table border="1">
+
+✅ Best Practice – Using CSS
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+Benefits:
+✔ Clean HTML
+✔ Better control
+✔ Responsive-friendly
+
+📌 Interview point:
+CSS is the best and modern way to style table borders.
+
+🔥 Quick Interview Summary
+Lists: ordered, unordered, description
+Nested list = list inside list
+Tables: structured data display
+colspan merges columns
+Use CSS for borders
+
+
+
+
+Q1. What is CSS? What are the 5 ways to implement CSS in HTML?
+✅ What is CSS?
+CSS (Cascading Style Sheets) is used to style and layout web pages — for example:
+Colors
+Fonts
+Spacing
+Layout (Flexbox, Grid)
+
+Responsiveness
+📌 HTML → Structure
+📌 CSS → Presentation
+📌 JavaScript → Behavior
+
+🔹 5 Ways to Implement CSS
+No	Method	Description
+1	Inline CSS	Inside HTML tag
+2	Internal CSS	Inside <style> tag
+3	External CSS	Separate .css file
+4	@import	Import CSS file
+5	CSS Preprocessors	SCSS, LESS, Stylus
+
+Q2. What is Inline Style in CSS? When to use it in real applications?
+📌 Definition:
+Inline CSS is written inside the HTML element using the style attribute.
+
+Example:
+<p style="color: red; font-size: 18px;">
+  Hello CSS
+</p>
+
+✅ When to Use:
+✔ Quick testing
+✔ Dynamic styles via JavaScript
+✔ One-off UI changes
+
+❌ Avoid When:
+❌ Large applications
+❌ Reusable components
+❌ Maintainability is required
+
+📌 Interview Tip:
+Inline CSS has the highest priority.
+
+Q3. What is Internal Stylesheet in CSS? When to use it?
+📌 Definition:
+CSS written inside <style> tag within <head>.
+
+Example:
+<head>
+  <style>
+    p {
+      color: blue;
+    }
+  </style>
+</head>
+
+✅ When to Use:
+✔ Small web pages
+✔ Single-page projects
+✔ Prototyping
+
+❌ Avoid When:
+❌ Multiple pages
+❌ Reusability needed
+
+Q4. What is External Stylesheet in CSS? When to use it?
+📌 Definition:
+CSS written in a separate .css file and linked to HTML.
+
+Example:
+<link rel="stylesheet" href="styles.css">
+
+/* styles.css */
+p {
+  color: green;
+}
+
+✅ When to Use:
+✔ Large projects
+✔ Multi-page websites
+✔ Scalable applications
+
+📌 Most recommended method
+
+Q5. What are the 5 advantages of External Stylesheet?
+✅ Advantages:
+1️⃣ Separation of concerns
+2️⃣ Reusable across pages
+3️⃣ Better performance (browser caching)
+4️⃣ Easy maintenance
+5️⃣ Cleaner HTML
+
+📌 Interview Line:
+External CSS improves maintainability, performance, and scalability.
+
+Q6. How do you include CSS in a webpage or HTML?
+3 Common Ways:
+<!-- Inline -->
+<p style="color:red"></p>
+
+<!-- Internal -->
+<style> p { color: blue; } </style>
+
+<!-- External -->
+<link rel="stylesheet" href="style.css">
+
+Q7. How to implement CSS using @import rule?
+📌 Definition:
+
+Imports one CSS file into another.
+
+Example:
+@import url("theme.css");
+
+body {
+  font-family: Arial;
+}
+
+❌ Drawbacks:
+❌ Slower loading
+❌ Not recommended for production
+
+📌 Interview Answer:
+@import loads CSS sequentially, impacting performance.
+
+Q8. What is CSS Preprocessors? What is SCSS?
+📌 CSS Preprocessors:
+Tools that extend CSS with:
+Variables
+Nesting
+Functions
+Mixins
+They compile into regular CSS.
+
+🔹 What is SCSS?
+SCSS (Sassy CSS) is a superset of CSS with advanced features.
+
+Example:
+$primary: blue;
+
+button {
+  background: $primary;
+  &:hover {
+    background: darkblue;
+  }
+}
+
+📌 Used in React, Angular, large apps.
+
+Q9. What are the 3 Types of CSS Preprocessors?
+Preprocessor	Extension
+SCSS / SASS	.scss, .sass
+LESS	.less
+Stylus	.styl
+
+Popular Choice:
+✔ SCSS (most widely used)
+
+🔥 Quick Interview Summary
+CSS styles web pages
+External CSS is best practice
+Inline CSS has highest priority
+@import is slow
+SCSS adds power to CSS
+
+
+🎯 CSS SELECTORS – Interview Q&A
+Q1. What are CSS Selectors?
+CSS selectors are used to select HTML elements and apply styles to them.
+
+p {
+  color: blue;
+}
+
+Q2. What are the different types of CSS selectors?
+🔹 1. Universal Selector
+* {
+  margin: 0;
+}
+
+🔹 2. Element (Tag) Selector
+h1 {
+  color: red;
+}
+
+🔹 3. Class Selector
+.title {
+  font-size: 20px;
+}
+
+🔹 4. ID Selector
+#header {
+  background: black;
+}
+
+📌 Note: ID must be unique.
+
+🔹 5. Group Selector
+h1, h2, p {
+  color: green;
+}
+
+🔹 6. Attribute Selector
+input[type="text"] {
+  border: 1px solid blue;
+}
+
+🔹 7. Descendant Selector
+div p {
+  color: red;
+}
+
+🔹 8. Child Selector
+div > p {
+  color: blue;
+}
+
+Q3. Difference between Class and ID selector?
+Class	     ID
+Reusable	  Unique
+. prefix	  # prefix
+Lower specificity	Higher specificity
+
+Q4. What is CSS Specificity?
+Specificity decides which CSS rule is applied when multiple rules target the same element.
+
+Priority Order:
+Inline > ID > Class > Element
+
+📐 CSS LAYOUT & POSITIONING – Interview Q&A
+
+Q5. What is the CSS Box Model?
+The box model consists of:
+Content → Padding → Border → Margin
+
+div {
+  padding: 10px;
+  border: 2px solid black;
+  margin: 20px;
+}
+
+Q6. What is the difference between display properties?
+Property	      Behavior
+block	         New line, full width
+inline	        No new line
+inline-block	  Inline + width/height
+none	          Removes element
+
+Q7. What are the CSS position values?
+Value	       Description
+static	      Default
+relative	    Relative to itself
+absolute	    Relative to nearest positioned parent
+fixed	       Relative to viewport
+sticky	      Mix of relative & fixed
+Example:
+.box {
+  position: absolute;
+  top: 20px;
+}
+
+Q8. Difference between absolute and relative positioning?
+Relative	                     Absolute
+Moves relative to itself	     Moves relative to parent
+Keeps space	                  Removed from document flow
+
+Q9. What is Flexbox?
+Flexbox is a 1-dimensional layout system for aligning elements.
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+Q10. What is CSS Grid?
+Grid is a 2-dimensional layout system.
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+Q11. Difference between Flexbox and Grid?
+Flexbox	Grid
+1D layout	2D layout
+Row OR column	Rows AND columns
+
+📱 RESPONSIVE DESIGN – Interview Q&A
+Q12. What is Responsive Web Design?
+Responsive design makes websites adapt to different screen sizes.
+
+Q13. What is a Media Query?
+Media queries apply CSS based on screen size.
+
+@media (max-width: 768px) {
+  body {
+    background: lightgray;
+  }
+}
+
+Q14. What is the viewport meta tag?
+Controls page scaling on mobile devices.
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+Q15. What are CSS units used in responsive design?
+Unit	   Use
+%	      Relative
+em/rem	 Font-based
+vw/vh	  Viewport
+px	     Fixed
+
+Q16. Difference between em and rem?
+em	rem
+Relative to parent	Relative to root
+
+Q17. What is Mobile-First Design?
+Designing for small screens first, then scaling up.
+
+/* Mobile */
+body { font-size: 14px; }
+
+/* Desktop */
+@media (min-width: 768px) {
+  body { font-size: 16px; }
+}
+
+Q18. What are breakpoints?
+Breakpoints define screen widths where layout changes.
+Common breakpoints:
+576px
+768px
+992px
+1200px
+
+🔥 Quick Interview Tips
+Use Flexbox for components
+Use Grid for layouts
+Prefer external CSS
+Avoid inline styles
+Always use viewport meta tag

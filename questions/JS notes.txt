@@ -1,0 +1,1947 @@
+1 ------ *How JavaScript works?
+Ans-Everything in JavaScript happens inside an "execution context".
+
+Execution context has two component
+1)memory component[variable environment] 
+-This is the place where all variables and functions are stored as key value pairs. eg-{key: value ||  n:2;} 
+
+2)code component[Thread of execution]
+-This is the place where code is executed one line at a time
+
+Note-
+*JavaScript is a synchronous single-threaded language
+
+-Single threaded means JavaScript can execute once command at a time
+-Synchronous single-threaded that means JavaScript can execute one command at a time in a specific order.
+
+JS works.
+1. Whenever any JavaScript code is executed an execution context is created and it is the Global Execution Context.
+2. An Execution Context is basically a box which has two components called Memory Component(Variable Environment) and Code Component(Thread Of Execution).
+3. The Execution context is created in two phases
+   a. Memory Creation Phase : In this Phase, Memory is allocated to all the variables and functions which are present in the global scope. Special keyword Undefined in case of variables and literally the whole function in case of functions.
+   b. Code Execution Phase : In this Phase, code is executed line by line.
+
+4. Whenever there is a function invocation an all new execution context is created and same process is followed again.
+5. If there is any function parameter then it is also allocated memory while creating the execution context of the function.
+6. Whenever return keyword is encountered , it means the task of function is over and it returns back the control of the program back to the place where it was invoked. and with this this execution context is deleted from stack.
+
+7. Call Stack is basically a stack which maintains the order of execution of execution context. Whenever a code is executed the Global Execution Context is pushed into the stack first and later on as per the function invocation the  execution context is pushed into the stack. When the function code is done executing the execution context is popped out and last the Global Execution Contexts also deleted.
+
+ 2 ------  Hoisting
+
+Hoisting in JavaScript is a process during the compilation phase where variable and function declarations are moved to the top of their containing scope. However, only the declarations are hoisted, not the initializations.
+
+When a JavaScript program runs, a global execution context is created. This context consists of two phases:
+a) Memory Creation Phase :
+.Variable declarations are scanned and allocated memory, initialized with the value 'undefined'.
+.Function declarations are scanned and stored in memory with their entire code.
+b) Code Execution Phase:
+The code is executed line by line.
+
+Hoisting is not about physically moving code to the top, but rather about how JavaScript allocates memory for variables and functions during the memory creation phase of the execution context. This mechanism allows for certain behaviors like using functions before they appear in the code, but it's crucial to understand that variables are initialized as 'undefined' until they're assigned a value during code execution. You can call a function before its declaration in the code because the entire function is available in memory from the start. Trying to access a variable before its declaration will result in 'undefined'.
+Function expressions and arrow functions, being treated as variables, hence cannot be called before their declaration in the code. Variable and function declarations are processed before any code is executed. However, only the declarations are processed, not the initializations. This gives the impression that declarations are "moved to the top" of their scope, but it's more accurate to say they're processed early in the execution context's creation.
+
+3 ------ Window And this
+	• window object is created by the JS engines of the respective browsers when global execution context is created.
+	• whenever an execution context is created a "this" variable is also created.
+	• at the global level "this" points to the global object( window object in case of browsers).
+	• anything that is not inside a function is the "global space".
+	• whenever we create any variables or functions in the "global space", they get attached to the global object( window object in case of browsers).
+	
+	so to access the variables/function defined in the global space , 
+	we can use any of the below:
+		console.log(window.a);
+		console.log(a);
+		console.log(this.a)             //at the global space level, where this points to the window object
+
+4 ------- Scope Chain - 
+1. Scope of a variable is directly dependent on the lexical environment.
+2. Whenever an execution context is created, a lexical environment is created. Lexical environment is the local memory along with the lexical environment of its parent. Lexical as a term means in hierarchy or in sequence.
+3. Having the reference of parent's lexical environment means, the child or the local function can access all the variables and functions defined in the memory space of its lexical parent.
+4. The JS engine first searches for a variable in the current local memory space, if its not found here it searches for the variable in the lexical environment of its parent, and if its still not found, then it searches that variable in the subsequent lexical environments, and the sequence goes on until the variable is found in some lexical environment or the lexical environment becomes NULL.
+5. The mechanism of searching variables in the subsequent lexical environments is known as Scope Chain. If a variable is not found anywhere, then we say that the variable is not present in the scope chain.
+
+
+5 ------ let & const in JS  | Temporal Dead Zone 
+
+-> let and const are hoisted. we cant use them before initialization is result of "temporal dead zone".
+-> js use diff memory than global execution context to store let and cost. which is reason behind "temporal dead zone"
+-> level of strictness ... var<<let<<const.
+-> var //no temporal dead zone, can redeclare and re-initialize, stored in GES
+    let //use TDZ, can't re-declare, can re-initialize, stored in separate memory
+    const //use TDZ, can't re-declare, can't re-initialize, stored in separate memory
+-> syntax error is similar to compile error. while type and reference error falls under run time error.
+-> syntax error ... violation of JS syntax
+    type error ...  while trying to re-initialize const variable
+    reference error ... while trying to access variable which is not there in global memory.
+
+6 ------ BLOCK SCOPE & Shadowing in JS
+
+1. Code inside curly bracket is called block.
+2. Multiple statements are grouped inside a block so it can be written where JS expects single statements like in if, else, loop, function etc.
+3. Block values are stored inside separate memory than global. They are stored in block. (the reason let and const are called block scope)
+4. Shadowing of variables using var, let and const.
+5. The shadow should not cross the scope of original otherwise it will give error.
+6. shadowing let with var is illegal shadowing and gives error.
+7. var value is stored in nearest outer function or global scope and hence can be accessed outside block as well whereas same is not the case with let and const.
+
+Q) What is block in JavaScript?
+> multiple js statements formed in a group enclosed in brackets and it forms a block
+
+Q) What is need of a block/Grouping?
+> JavaScript sometimes expect to run a single statement to run, but we need to run commands with multiple statements which is only possible by block
+eg. on 4:14
+
+write a simple function:
+// even empty script is perfectly valid js script, what about empty brackets!!
+{
+ var a = 10;
+ let b = 20;
+ const c =30; 
+}
+
+When a js script get hoisted (a Global Execution Context) gets created 'var' listed towards 'Global environment' and other variables 'let' and 'const' declarations go to the 'Block environment' 
+
+This become especially important when deciding the scope of a particular variable, since b and c are located in 'Block environment' and for a as we know exists in 'Global environment' any statement out of the "Block" can access 'a' ie.  ' Variable in Global environment' and other are not!
+
+so when we understand the extent of Global and local environment variables and their 'Scopes' == Environment that forms the lexical hierarchy of 'Scopes' and 'Scopes' have Levels like 'Scope inside scope'
+see script in 7:03
+
+ var a = 100;
+{
+ var a = 10;
+ let b = 20;
+ const c =30; 
+ console.log(a);
+ console.log(b);
+ console.log(c);
+}
+ console.log(a);
+ console.log(b);
+ console.log(c);
+
+So in block " var a = 10;" influences the value within the block hence  console.log(a); >> 10 and outside of the block 'Variable in Global environment' influences value of a hence console.log(a); >> 100
+
+Illegal shadowing:
+
+let a = 200;
+{
+ var a =20;
+}
+
+as 'var' declaration goes to 'Global environment' and sets in Memory context, it cannot be set using 'Block environment' value Hence:    Uncaught SyntaxError: Identifier 'a' has already been declared
+
+7 ------ Clouser
+
+1. Eg : - 
+    function x() {
+     var a = 7;
+     function y() {
+       console.log(a);
+    }
+    y();
+}
+x();  
+
+Output : 7 
+
+Closure :   Scope
+Closure(x)  a : 7 
+Closure basically means that a function bind together with its lexical environment. Or function along with its lexical scope is known as Closure.
+The function y() was bonded to the variables of function x(). That is, y() forms a closure and it has access to it's parent's lexical scope. 
+Closure in JS is a form of lexical scoping used to preserve variables from the outer scope (x()) of a function in the inner scope of a function (y()). 
+
+2. In JS, we can assign function to variables. 
+    Eg : - 
+    function a() {
+    var x = 9;
+    var b = function y() {
+                 console.log(x);
+               }
+    b();
+  }
+  a();
+
+Output : 9 
+
+3. Functions can also be passed as arguments for another function. 
+    Eg : - 
+    function x(y) {
+    var a = 9; 
+    console.log(y);
+    y();
+    }
+   x( function y() {
+      console.log("hello world");
+});
+
+4. Functions can also be returned from another function. 
+    Eg : - 
+    function x() {
+    var a=7;
+    function y () {
+     console.log(a);
+      }
+     return y;
+  }
+var z = x();
+
+5. Eg : - 
+       function x() {
+       var a=7;
+      function y () {
+       console.log(a);
+      }
+     return y;
+  }
+var z = x();
+console.log(z);
+
+Output : f y() {
+               console.log(a);
+               }
+* Note that here y() was never called, it is just simply being returned by x. So, "z" actually contains the whole body of y(). 
+
+Eg : - 
+   function x() {
+    var a=7;
+    function y () {
+     console.log(a);
+      }
+     return y;
+  }
+x();
+var z = x();
+z();
+
+Output : 7 
+
+* Even though, after the function x() finishes executing and it is nowhere residing in the call stack, it's execution context is also deleted. So, how is "z" able to find the value of "a". It is because when functions are returned, they still remember where they came from, they still remember the values of variables they have access to. We know that y() in its closure contains the reference to "a". So, when y() was returned, not only a function is returned, it's closure or lexical scope is also returned. So, this is how JS engine was able to find the value of "a", because "a" was residing in the closure of y(). 
+
+6.   function x() {
+    var a=7;
+    function y () {
+     console.log(a);
+      }
+    a = 100;
+    return y;
+  }
+
+var z = x();
+z();
+
+Output : 100 
+
+7. function z() {
+    var b = 100;
+    function x() {
+      var a = 7;
+    function y () {
+     console.log(a,b);
+}
+y();
+}
+x();
+}
+z();
+
+Output : 7 100
+
+Memory Picture : 
+
+Scope :
+Closure (x)
+  a : 7
+Closure (z)
+  b : 100
+
+* y() forms a closure along with the the scope of x() and z(). And that's why it remembers the values of "a" and "b". 
+
+Eg : 
+ function z() {
+    var b = 100;
+    function x() {
+      var a = 7;
+    function y () {
+     console.log(a,b);
+}
+return y;
+}
+return x;
+}
+var p = z();
+var t = p();
+t();
+
+Output : 7 100
+
+8. Uses of closures : 
+A. Module Design Pattern
+B. Currying
+C. Maintaining state in async world
+D. setTimeouts
+E. Iterators
+
+/ In below case, close is getting called for each value of i. And for each close() called a new execution context is getting created and in execution phase of that context new callback function context is created with lexical environment, which is reffering to i with which close() was called as close(i) was immediate parent of that callback function. Above cycle goes on and on until for loop ends.
+
+question
+function clock(){
+    for(var i = 1 ; i <= 5 ; i ++){
+            setTimeout(function (){
+                console.log(i);
+            },i * 1000);
+    }
+}
+clock();
+
+output 
+6
+6
+6
+6
+6
+ if we use let i then , output 1 2 3 4 5.
+
+function clock(){
+    for(var i = 1 ; i <= 5 ; i ++){
+        function close(i){
+            setTimeout(function (){
+                console.log(i);
+            },i * 1000);
+        }
+        close(i);
+    }
+}
+clock();
+
+//output 
+1
+2
+3
+4
+5
+
+In earlier case, only x() was there which was getting called only once and then callback function  was called 6 times but all of them were having their parent as x() and hence all were pointing to same address(reference) of i.-> x is clock.
+
+
+1. An inner function can be directly called using two parenthesis ()().
+2. Even parameters can be passed this way (Remember that the function needs to be returned to do this)
+3. Closures can also be used for data hiding and encapsulation. So other code cannot access this value.
+4. Unused variables are automatically deleted in High Level Programming language by garbage collector. Closures allocate a lot of memory which cannot be deleted so this acts as a disadvantage.
+5. Some browsers now have smart garbage collectors that automatically deletes variables that are not used outside closures.
+
+// Ex of closure 
+function outest(b){
+	var a = 10;
+	function outer(c){
+		function inner(){
+			console.log(a,b,c);
+		}
+		return inner;
+	}
+	return outer;
+}
+var b = 50;
+let c  = 100;
+const close = (outest(b))(c);
+close(); // 10,50,100
+
+const close2 =(outest(b))();
+close2(c) // 10 50 100
+
+// Example of Data Privacy using Closures( Data encapsulation)
+function counter(){
+	var count = 0;
+	return function increCounter(){
+		count++;
+		console.log(count);
+	}
+}
+
+const counter1 = counter();
+counter1();
+counter1();
+
+const counter2 = counter();
+counter2();
+counter2();
+counter2();
+
+output. // 1 2 1 2 3
+
+//Example of Function Constructor in JavaScript
+
+Function Counter(){
+	var c = 0;
+	this.incC = function (){
+		c++;
+		console.log(c);
+	}
+	this.decC = function (){
+		c--;
+		console.log(c);
+	}
+}
+
+const counter = new Counter();
+counter.incC();
+counter.incC();
+counter.incC();
+counter.decC();
+
+output // 1 2 3 2
+
+8 ------ FIrst Class Functions.
+
+1.  What is Function Statement ?
+A.  A normal function that we create using Naming convention. & By this we can do the Hoisting.
+      For Ex  -  function xyz(){
+                            console.log("Function Statement");
+                       }
+
+2.  What is Function Expression ?
+A.  When we assign a function into a variable that is Function Expression. & We can not do Hoisting by this becz it acts like variable.
+      For Ex - var a = function(){
+                            console.log("Function Expression");
+                    }
+
+3.  What is Anonymous Function ?
+A.  A Function without the name is known as Anonymous Function. & It is used in a place where function are treated as value.
+      For Ex - function(){
+                     }
+
+4.  What is Named Function Expression ?
+A.  A function with a name is known as Named Function Expression.
+      For Ex - var a = function xyx(){
+                            console.log("Names Function Expression");
+                     }
+
+5.  Difference b/w Parameters and Arguments ?
+A.  When we creating a function  & put some variabels in this ( ) that is our Parameters.
+       For Ex - function ab( param1, param2 ){
+                              console.log("");
+                      }
+                ab(arg1,arg2);
+       & When we call this function & pass a variabel in this ( ) that is our Arguments
+       For Ex - ab( 4, 5 );
+
+6.  What is First Class Function Or First class citizens?
+A.   The Ability to use function as value,
+*     Can be passed as an Argument,
+*     Can be executed inside a closured function &
+*     Can be taken as return form.
+       For Ex - var b = function(param){
+                             return function xyz(){
+                                     console.log(" F C F ");
+                             }
+                     } 
+A first-class function is a function that is treated like any other variable in a programming language.
+That means a function can be:
+Assigned to a variable
+Passed as an argument to another function
+Returned from a function
+Stored in data structures (arrays, objects, etc.)
+
+// 1. Assigned to a variable
+const greet = function () {
+  return "Hello!";
+};
+
+// 2. Passed as an argument
+function sayHello(fn) {
+  console.log(fn());
+}
+sayHello(greet);
+
+// 3. Returned from a function
+function createMultiplier(multiplier) {
+  return function (value) {
+    return value * multiplier;
+  };
+}
+
+const double = createMultiplier(2);
+console.log(double(5)); // 10
+
+
+7. Function are heart of JS. They are called first class citizens or first class functions because they have the ability to be stored in the variables, passed as parameters and arguments. They can also be returned in the function.
+
+9 ------ Callback Functions in JS ft. Event Listeners 
+
+1. Function that is passed on as argument to another function is called callback function.
+2. setTimeout helps turn JS which is sinhlethreaded and synchronous into asynchronous.
+3. Event listeners can also invoke closures with scope.
+4. Event listeners consume a lot of memory which can potentially slow down the website therefore it is good practice to remove if it is not used.
+
+Example callback function
+
+setTimeout(() => {
+  console.log('timer');
+},5000);
+
+function x(y){
+  y()
+  console.log('x');
+}
+
+x(function y() {
+  console.log('y)
+})
+
+output // y x timer
+
+Event Listeners with closure example
+
+function attachEventListiner (){
+  let count = 0;
+  document.getElementById('click', function xyz() {
+    console.log(++count);
+  })
+}
+
+attachEventListiner();
+
+10 ------  Asynchronous JavaScript & EVENT LOOP from scratch 
+
+1. Browser has superpowers that are lent to JS engine to execute some tasks, these superpowers include web API's such as console, location, DOM API, setTimeout, fetch, local storage.
+2. Callback functions and event handers are first stored in Web API environment and then transferred to callback queue.
+3. Promises and mutation observer are stored in API environment and then transferred to microtask queue.
+4. Event loop continuously observes call stack and when it is empty it transfers task to call stack.
+5. Micro task is given priority over callback tasks.
+6. Too many micro tasks generated can cause Starvation (nit giving time to callback tasks to execute).
+
+
+1) When does the event loop actually start ? Are only asynchronous web api callbacks are registered in web api environment ? Does the web api environment stores only the callback function and pushes the same callback to queue/microtask queue? How does it matter if we delay for setTimeout would be 0ms. Then callback will move to queue without any wait ?
+Ans - 
+1. When does the event loop actually start? - Event loop, as the name suggests, is a single-thread, loop that is `almost infinite`. It's always running and doing its job. ❤️
+2.  Are only asynchronous web API callbacks are registered in the web API environment? - YES, the synchronous callback functions like what we pass inside map, filter, and reduce aren't registered in the Web API environment. It's just those async callback functions that go through all this.
+
+Callback Queue (Task Queue)
+
+Stores callbacks from:
+setTimeout
+setInterval
+DOM events
+console
+location
+
+eg : -
+console.log('a')
+setTimeout(() => {
+  console.log("Callback");
+}, 5000);
+console.log('b')
+
+output // a b callback
+
+What happens:
+setTimeout goes to Web API
+Timer starts in background
+JS continues execution
+Callback is sent to a queue later call stack by event loop 
+
+👉 Web APIs are not part of JavaScript, they’re provided by the browser.
+
+Even with 0ms, callback waits until:
+Call stack is empty
+
+
+Microtask Queue (Very Important ⭐)
+
+Higher priority queue than Callback Queue.
+Contains:
+Promise.then
+Promise.catch
+queueMicrotask
+MutationObserver
+
+eg: -
+Promise.resolve().then(() => console.log("Promise"));
+setTimeout(() => console.log("Timeout"), 0);
+output // Promise Timeout
+
+Microtask Queue is always executed before Callback Queue
+
+Event Loop (Heart of Async JS ❤️)
+The Event Loop continuously checks:
+Is Call Stack empty?
+If yes:
+Execute all Microtasks
+Then execute one task from Callback Queue
+
+Example (Classic Interview Question)
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Timeout");
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log("Promise");
+});
+
+console.log("End");
+
+
+Execution Flow:
+Start → Call Stack
+setTimeout → Web API
+Promise.then → Microtask Queue
+End → Call Stack
+Call Stack empty
+Microtask Queue runs → Promise
+Callback Queue runs → Timeout
+
+output //
+Start
+End
+Promise
+Timeout
+
+Starvation of Callback Queue ⚠️
+If Microtask Queue keeps getting tasks:
+
+function infinitePromise() {
+  Promise.resolve().then(infinitePromise);
+}
+infinitePromise();
+
+👉 Callback Queue never executes
+This is called Starvation
+
+Key Takeaways (Must Remember)
+JavaScript is single-threaded
+Async tasks use Web APIs
+Event Loop manages execution
+Microtask Queue > Callback Queue
+Promises always execute before setTimeout
+
+The Event Loop ensures non-blocking behavior in JavaScript by prioritizing microtasks (Promises) over callback tasks and executing them when the call stack is empty.
+
+11 ------ JS Engine EXPOSED 🔥 Google's V8 Architecture 🚀 
+
+1. JS runtime environment contains all elements required to run JS.
+2. It contains JS engine, set of API's, callback queue, microtask queue, event loop.
+3. JS engine is a piece of code.
+4. Process includes Parsing ---> Compilation -----> Execution.
+5. Parsing breaks code into tokens and converts it into AST(Abstract Syntax Tree).
+6. Modern JS engine follows JIT(Just in time) compilation, it interprets while it optimises code as much as it can.
+7. Execution and Compilation are done together.
+8. Execution has Garbage collector and other optimisation such as inlining, copy elusion, inline caching etc.
+
+12 ------  TRUST ISSUES with setTimeout()
+
+1. The setTimeout function stores it in the callback queue which is executed only after call stack is empty, even if setTimeout is set to 0ms. 
+2. setTimeout ensures that minimum it will take the time mentioned because it may be paused due to call stack not empty.
+
+setTimeout(() => {
+  console.log("Hello");
+}, 5000);
+
+👉 This will run exactly after 5 seconds ❌
+❗ Reality:
+setTimeout guarantees minimum delay, not exact timing.
+
+How setTimeout actually works
+Behind the scenes:
+
+Timer starts in Web APIs
+After delay expires → callback moves to Callback Queue
+Callback runs only when Call Stack is empty
+👉 If Call Stack is busy → callback waits
+
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Timeout");
+}, 5000);
+
+// Blocking the main thread
+let start = Date.now();
+while (Date.now() - start < 10000) {}
+
+console.log("End");
+OutPut //
+Start
+End
+Timeout - > After 10 secs it will print when call stack is empty and event loop moves callback queue process to call stack.
+
+setTimeout(() => {
+  console.log("Timeout");
+}, 0);
+
+console.log("End");
+Output //
+End
+Timeout
+
+❓ Why?
+
+setTimeout(0) still:
+Goes to Web API
+Then Callback Queue
+Waits for Call Stack to clear
+👉 Minimum delay ≠ immediate execution
+
+
+12 ------ Higher-Order Functions ft. Functional Programming
+
+1. Follow DRY(Don't Repeat Yourself) principle while coding.
+2. Use function to stop writing repeating line of codes.
+3. Function that takes another function as argument(callback function) is known as Higher order functions.
+4. It is this ability that function can be stored, passed and returned,  they are called first class citizens.
+5. If we use Array.property.function-name. This function is accessible to any array in your code.
+
+
+1️⃣ What is a Higher-Order Function?
+
+A Higher-Order Function (HOF) is a function that:
+
+Takes another function as an argument, OR
+
+Returns a function
+
+Because JavaScript has first-class functions, HOFs are possible.
+
+2️⃣ Why Higher-Order Functions?
+
+They help achieve:
+
+Code reusability
+
+Abstraction
+
+Clean & readable code
+
+Functional programming style
+
+Instead of repeating logic, we pass behavior.
+
+3️⃣ Problem Without HOFs (Bad Practice)
+const radius = [3, 1, 2, 4];
+
+const calculateArea = function (radius) {
+  const output = [];
+  for (let i = 0; i < radius.length; i++) {
+    output.push(Math.PI * radius[i] * radius[i]);
+  }
+  return output;
+};
+
+const calculateCircumference = function (radius) {
+  const output = [];
+  for (let i = 0; i < radius.length; i++) {
+    output.push(2 * Math.PI * radius[i]);
+  }
+  return output;
+};
+❌ Logic repetition
+❌ Poor abstraction
+
+4️⃣ Solution Using Higher-Order Functions
+const radius = [3, 1, 2, 4];
+
+const area = r => Math.PI * r * r;
+const circumference = r => 2 * Math.PI * r;
+const diameter = r => 2 * r;
+
+const calculate = function (radius, logic) {
+  const output = [];
+  for (let i = 0; i < radius.length; i++) {
+    output.push(logic(radius[i]));
+  }
+  return output;
+};
+
+console.log(calculate(radius, area));
+console.log(calculate(radius, circumference));
+console.log(calculate(radius, diameter));
+
+✔ Reusable
+✔ Clean
+✔ Behavior passed as function
+👉 calculate is a Higher-Order Function
+
+5️⃣ Functional Programming Concept
+Core idea:
+Functions should be pure and reusable
+Avoid side effects
+Treat data as immutable
+Pass logic as functions
+
+Array.prototype.myMap = function (callback) {
+  const output = [];
+  for (let i = 0; i < this.length; i++) {
+    output.push(callback(this[i], i, this));
+  }
+  return output;
+};
+Shows:
+Understanding of HOFs
+this keyword
+Array internals
+
+13 ----- map, filter and reduce .
+
+1️⃣ Why map, filter, reduce?
+
+They are Higher-Order Functions used in Functional Programming to:
+Write clean, declarative code
+Avoid loops and mutation
+Improve readability and reuse
+They do not change the original array (immutable).
+
+2️⃣ map() – Transform each element
+
+👉 Used when you want to transform every item in an array.
+
+Syntax
+array.map((item, index, array) => newItem);
+
+Example
+const arr = [1, 2, 3, 4];
+const doubled = arr.map(x => x * 2);
+
+Output
+[2, 4, 6, 8]
+
+✔ Returns new array
+✔ Same length as original
+
+3️⃣ filter() – Select some elements
+
+👉 Used when you want to filter items based on a condition.
+
+Syntax
+array.filter((item, index, array) => boolean);
+
+Example
+const arr = [1, 2, 3, 4];
+const evens = arr.filter(x => x % 2 === 0);
+
+Output
+[2, 4]
+
+✔ Returns new array
+✔ Length may change
+
+4️⃣ reduce() – Reduce to a single value
+👉 Used when you want to derive one result from many values.
+
+Syntax
+array.reduce((accumulator, current, index, array) => newAcc, initialValue);
+
+Example (Sum)
+const arr = [1, 2, 3, 4];
+const sum = arr.reduce((acc, curr) => acc + curr, 0);
+
+Output
+10
+
+✔ Returns any type (number, object, array, etc.)
+
+5️⃣ Real Example (Namaste-style 🔥)
+const users = [
+  { firstName: "Akshay", lastName: "Saini", age: 26 },
+  { firstName: "Donald", lastName: "Trump", age: 75 },
+  { firstName: "Elon", lastName: "Musk", age: 50 },
+  { firstName: "Deepika", lastName: "Padukone", age: 26 }
+];
+
+Get full names (map)
+const fullNames = users.map(
+  user => `${user.firstName} ${user.lastName}`
+);
+
+Count people by age (reduce)
+const ageCount = users.reduce((acc, curr) => {
+  acc[curr.age] = (acc[curr.age] || 0) + 1;
+  return acc;
+}, {});
+
+Output
+{ 26: 2, 50: 1, 75: 1 }
+
+First names of people aged < 30
+Using filter + map
+const youngNames = users
+  .filter(user => user.age < 30)
+  .map(user => user.firstName);
+
+Using reduce (single loop)
+const youngNames = users.reduce((acc, curr) => {
+  if (curr.age < 30) acc.push(curr.firstName);
+  return acc;
+}, []);
+
+✔ reduce can do map + filter
+
+14 ------ Callback Hell 
+
+Two issues while using callbacks
+
+1 - Callback hell
+When a function is passed as an argument to another function, it becomes a callback function. This process continues and there are many callbacks inside another's Callback function.
+This grows the code horizontally instead of vertically. That mechanism is known as callback hell. 
+
+2 - Inversion of control
+The callback function is passed to another callback, this way we lose the control of our code. We don't know what is happening behind the scene and the program becomes very difficult to maintain. 
+That process is called inversion of control. 
+
+1️⃣ What is Callback Hell?
+Callback Hell happens when:
+Multiple async operations depend on each other
+Callbacks are nested inside callbacks
+Code becomes hard to read, debug, and maintain
+
+Shape of Callback Hell
+async1(() => {
+  async2(() => {
+    async3(() => {
+      async4(() => {
+        // 😵 deeply nested
+      });
+    });
+  });
+});
+
+This structure is also called:
+Pyramid of Doom
+Christmas Tree code
+
+2️⃣ Why Callback Hell Occurs
+Because:
+JavaScript is asynchronous
+Earlier async handling relied heavily on callbacks
+Sequential async operations were chained manually
+
+3️⃣ Real-World Example (Namaste Style 🔥)
+
+E-commerce flow
+Create Order
+Make Payment
+Show Order Summary
+Update Wallet
+
+Using Callbacks (Bad Code)
+createOrder(cart, function (orderId) {
+  proceedToPayment(orderId, function (paymentInfo) {
+    showOrderSummary(paymentInfo, function () {
+      updateWallet();
+    });
+  });
+});
+
+❌ Hard to read
+❌ Error handling is painful
+❌ Not scalable
+
+4️⃣ Problems with Callback Hell ⚠️
+Unreadable code
+Tight coupling
+Error handling nightmare
+Inversion of Control ❗
+
+5️⃣ Inversion of Control (Very Important ⭐)
+You hand over control of your logic to:
+Another function
+A third-party library
+An API
+
+apiCall(data, callback);
+
+👉 You trust:
+Callback will be called
+Callback will be called only once
+Callback will not be called too early/late
+
+❌ No guarantee
+❌ Risky design
+
+6️⃣ How Promises Solve Callback Hell
+Promises:
+Flatten the code
+Improve readability
+Give better control
+Centralize error handling
+
+Same Example with Promises
+createOrder(cart)
+  .then(orderId => proceedToPayment(orderId))
+  .then(paymentInfo => showOrderSummary(paymentInfo))
+  .then(() => updateWallet())
+  .catch(err => console.error(err));
+
+✔ Clean
+✔ Chainable
+✔ Error handling in one place
+
+
+15 ------  Promise
+
+1. Before promise we used to depend on callback functions which would result in 1.) Callback Hell (Pyramid of doom) | 2.) Inversion of control
+2. Inversion of control is overcome by using promise.
+  2.1) A promise is an object that represents eventual completion/failure of an asynchronous operation.
+  2.2) A promise has 3 states: pending | fulfilled | rejected.
+  2.3)  As soon as promise is fulfilled/rejected => It updates the empty object which is assigned undefined in pending state.
+  2.4) A promise resolves only once and it is immutable. 
+  2.5) Using .then() we can control when we call the cb(callback) function.
+
+3. To avoid callback hell (Pyramid of doom) => We use promise chaining. This way our code expands vertically instead of horizontally. Chaining is done using '.then()'
+4. A very common mistake that developers do is not returning a value during chaining of promises. Always remember to return a value. This returned value will be used by the next .then()
+
+
+1️⃣ What is a Promise?
+A Promise is an object that represents the eventual result of an async operation.
+Promise states:
+Pending – initial state
+Fulfilled – success
+Rejected – failure
+
+2️⃣ Why Promises?
+They solve:
+Callback Hell
+Inversion of Control
+👉 You attach logic using .then() instead of passing callbacks.
+
+3️⃣ Creating a Promise
+const promise = new Promise((resolve, reject) => {
+  if (true) resolve("Success");
+  else reject("Error");
+});
+
+4️⃣ Consuming a Promise
+promise
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
+
+5️⃣ Real Example (Namaste E-commerce 🔥)
+const cart = ["shoes", "shirt", "pant"]
+createOrder(cart)
+  .then(orderId => proceedToPayment(orderId))
+  .then(paymentInfo => showOrderSummary(paymentInfo))
+  .then(() => updateWallet())
+  .catch(err => console.log(err));
+
+✔ Clean
+✔ Readable
+✔ Centralized error handling
+
+6️⃣ Promise Chaining (Important ⭐)
+Each .then() returns a new Promise
+Return value flows to next .then()
+
+Promise.resolve(5)
+  .then(x => x * 2)
+  .then(x => x * 3)
+  .then(console.log); // 30
+
+7️⃣ Promise Error Handling
+Promise.reject("Failed")
+  .then(() => {})
+  .catch(err => console.log(err));
+
+👉 One .catch() handles all errors above it.
+
+16 ------ Creating a Promise, Chaining & Error Handling
+
+1. Promise can be created using a new Promise() constructor function.
+2. This constructor function takes a callback function as argument. 
+3. The callback function has 2 arguments named 'resolve' and 'reject'. Resolve and reject are the keywords provided by JS.
+4. We can only resolve or reject a promise. Nothing else can be done.
+5. An error can also be created using new Error('error message').
+6. There is also .catch() which is used to attach a failure callback function that handles any error that pops up during the execution of promise chain.
+7. .catch only handles error of .then() that are present above it. If there is any .then() below it, catch will not handle any error for that, also that ,then will get executed no matter what.
+8. It can be useful in a way if we want to catch error for a particular portion of a chain.
+9. We can have multiple catch based on requirement and then a general catch at the end.
+10. Always remember to return a value in the promise chain for the next .then to use .
+11. If it returns a value => It will be  used as an argument in next function. If it is a promise then the next .then in the promise chain is attached to the promise returned by the current callback function.
+
+Homework:
+
+const cart = ['shoes', 'pants', 'kurta'];
+
+createOrder(cart)
+  .then(function(orderId) {
+    console.log(orderId);
+    return orderId;
+  })
+  .then(function(orderID) {
+    return proceedToPayment(orderID)
+  })
+  .then(function({ message, amt }) {
+    console.log(message, 'of amount:', amt);
+  })
+  .then( ({message, amt}) => showOrderSummary(message,amt))
+  .then(function({ message, amt }) {
+    console.log('Your wallet has beed debited by:', amt);
+    return amt;
+  })
+  .then( amt => updateWallet(amt))
+  .then( msg => Console.log(msg));
+  .catch(function(err) {
+    console.log(err.message);
+  })
+  .then(function() {
+    console.log('No matter what happens, I will get executed');
+  });
+
+
+
+function createOrder(cart) {
+  const pr = new Promise(function(resolve, reject) {
+    // create order
+    // Validate Cart
+    // orderId
+    if (!validateCart(cart)) {
+      const err = new Error('Cart is not valid!');
+      reject(err);
+    }
+    // logic for createOrder
+    const orderId = '12345';
+    if (orderId) {
+      setTimeout(function() {
+        resolve(orderId);
+      }, 5000)
+    }
+  });
+
+  return pr;
+}
+
+function proceedToPayment(orderID) {
+  // Logic for handling payment.
+  // This function returns a promise
+  return new Promise(function(resolve, reject) {
+    // logic
+    resolve({ message: `Payment Successful for order id: ${orderID}`, amt: 2500 });
+  })
+}
+
+function showOrderSummary(paymentInfo, amt) {
+  return new Promise(function(resolve, reject) {
+    // console.log(amt);
+    if (amt >= 2000) {
+      resolve({ message: 'You have ordered items that cost ${amt} RS', amt });
+    } else {
+      reject(new Error('Please buy more for discount'));
+    }
+  })
+}
+
+const updateWallet = (amt) => {
+  let totalAmt = 5000;
+  return new Promise(resolve , reject){
+    if(totalAmt > amt){
+      resolve(`The remaining amount is ${totalAmt - amt}`);
+    } else {
+      const err = new Error('The wallet amount is less than cart value')
+      reject(err);
+    }
+  }
+}
+
+function validateCart(cart) {
+  // code to validate cart.
+  return true;
+  // return false;
+}
+
+
+17 ------ async await
+1️⃣ Why async / await?
+async / await is syntactic sugar over Promises.
+It helps write asynchronous code that looks synchronous.
+
+Problems with .then() chaining:
+Hard to read when chains grow
+Less intuitive control flow
+👉 async / await solves this by:
+Improving readability
+Making async code easier to reason about
+Using try/catch for error handling
+
+2️⃣ What is async?
+async keyword is used before a function
+An async function always returns a Promise
+
+Example
+async function getData() {
+  return "Namaste JS";
+}
+const data = await getData();
+console.log(data); // Promise {<fulfilled>: "Namaste JS"}
+Even though "Namaste JS" is returned, JS wraps it in a Promise.
+
+3️⃣ What is await?
+await can be used only inside async functions
+It pauses execution until the Promise resolves
+Does NOT block the JS thread (non-blocking)
+
+Example
+const p = new Promise(resolve => {
+  setTimeout(() => resolve("Promise resolved"), 3000);
+});
+
+async function handlePromise() {
+  const val = await p;
+  console.log(val);
+  console.log("After promise");
+}
+handlePromise();
+
+Output (after 3 seconds):
+Promise resolved
+After promise
+
+4️⃣ async/await vs .then()
+
+const p = new Promise(resolve => {
+  setTimeout(() => resolve("Promise resolved"), 3000);
+});
+
+Using .then()
+function getData() {
+  p.then(res => console.log(res));
+  console.log("JS continues");
+}
+// 
+JS continues
+Promise resolved
+
+Using async/await
+async function getData() {
+  const res = await p;
+  console.log(res);
+  console.log("JS continues");
+}
+// 
+Promise resolved
+JS continues
+
+Multiple Promises with await
+Example
+const p1 = new Promise(resolve =>
+  setTimeout(() => resolve("P1 resolved"), 2000)
+);
+
+const p2 = new Promise(resolve =>
+  setTimeout(() => resolve("P2 resolved"), 4000)
+);
+
+async function handlePromises() {
+  console.log("Start");
+  const val1 = await p1;
+  console.log(val1);
+  console.log("middle");
+  const val2 = await p2;
+  console.log(val2);
+  console.log("End");
+}
+
+handlePromises();
+
+Output
+Start    
+P1 resolved
+middle
+P2 resolved
+End
+
+the start prints then after 2 sec p1 res and middle then again after 2 sec p2 res and end prints.
+the p2 promise will not print after 4 sec when p1 is resloved it will print after 2 sec only.
+
+const p1 = new Promise(resolve =>
+  setTimeout(() => resolve("P1 resolved"), 4000)
+);
+
+const p2 = new Promise(resolve =>
+  setTimeout(() => resolve("P2 resolved"), 2000)
+);
+
+async function handlePromises() {
+  console.log("Start");
+  const val1 = await p1;
+  console.log(val1);
+console.log("middle");
+  const val2 = await p2;
+  console.log(val2);
+  console.log("End");
+}
+handlePromises();
+
+Output
+Start
+P1 resolved
+middle
+P2 resolved
+End
+
+first start will print and after 4 sec all other logs will print. even though p2 is resolved after 2sec it will be executed after p1 is resolved.
+
+6️⃣ Does await block JavaScript? ❌
+
+❌ await does NOT block the main thread
+✔ It suspends only the async function
+
+Proof Example
+console.log("Start");
+
+async function test() {
+  const res = await p;
+  console.log(res);
+}
+
+test();
+console.log("End");
+
+Output:
+Start
+End
+Promise resolved
+
+8️⃣ Error Handling WITHOUT try/catch
+You can still use .catch():
+
+async function handleError() {
+  const res = await p.catch(err => err);
+  console.log(res);
+}
+
+9️⃣ Real-World Example (Namaste E-commerce 🔥)
+async function placeOrder(cart) {
+  try {
+    const orderId = await createOrder(cart);
+    const paymentInfo = await proceedToPayment(orderId);
+    const summary = await showOrderSummary(paymentInfo);
+    await updateWallet(summary);
+  } catch (err) {
+    console.log("Error:", err);
+  }
+}
+
+✔ Sequential
+✔ Readable
+✔ Centralized error handling
+
+🔟 Async/Await + Event Loop (Important ⭐)
+await puts the remaining function code into microtask queue
+Promise resolution still follows:
+Call Stack → Microtask Queue → Callback Queue
+
+1️⃣1️⃣ Common Mistakes ⚠️
+❌ Using await outside async
+❌ Forgetting try/catch
+❌ Thinking await blocks JS
+❌ Writing sequential awaits when parallel execution is possible
+
+1️⃣2️⃣ Parallel Execution (Optimization)
+❌ Slow
+const a = await p1;
+const b = await p2;
+
+✔ Faster
+const [a, b] = await Promise.all([p1, p2]);
+
+Async await with fetch ();
+Example 
+const url = 'https://api.githubcom/users/bhushanbmalave';
+
+ async function handlePromise() {
+  try{
+    const data = await fetch(url);
+    const jsondata = await data.json();
+    console.log(jsondata)
+  } catch (err) {
+    console.log(err);
+  }
+  
+}
+handlePromise();
+
+const async handle = () => {
+  fetch(url).then(data => data.json()).then(res => console.log(res)).catch(err => console.log(err));
+}
+handle();
+
+
+18 ------  Promise APIs + Interview Questions 
+
+1️⃣ Why Promise APIs?
+They help when you have:
+Multiple promises
+Need parallel execution
+Need different failure strategies
+
+👉 All these APIs return a single Promise.
+
+2️⃣ Promise.all() ✅ (Fail-fast)
+What it does
+Runs promises in parallel
+Resolves when ALL succeed
+Rejects immediately if ANY fails
+
+Syntax
+Promise.all([p1, p2, p3]);
+
+Example
+const p1 = Promise.resolve(3);
+const p2 = new Promise(res => setTimeout(() => res(5), 1000));
+const p3 = Promise.resolve(7);
+
+Promise.all([p1, p2, p3])
+  .then(res => console.log(res))
+  .catch(err => console.log(err));
+
+Output
+[3, 5, 7]
+
+Failure case
+
+Promise.all([
+  Promise.resolve(1),
+  Promise.reject("Error"),
+  Promise.resolve(3)
+])
+.catch(err => console.log(err));
+
+❌ Output:
+Error
+
+Use when:
+All results are mandatory
+One failure should stop everything
+
+3️⃣ Promise.allSettled() 🧾 (Never fails)
+What it does
+Waits for ALL promises
+Never rejects
+Returns status + value/reason
+
+Syntax
+Promise.allSettled([p1, p2, p3]);
+
+Example
+Promise.allSettled([
+  Promise.resolve("Success"),
+  Promise.reject("Failed"),
+  Promise.resolve("Done")
+]).then(res => console.log(res));
+
+Output
+[
+  { status: "fulfilled", value: "Success" },
+  { status: "rejected", reason: "Failed" },
+  { status: "fulfilled", value: "Done" }
+]
+
+Use when:
+You need result of every promise
+Failures should not stop execution
+
+4️⃣ Promise.race() 🏁 (First result wins)
+What it does
+Resolves or rejects with the first settled promise
+Does NOT wait for others
+
+Syntax
+Promise.race([p1, p2, p3]);
+
+Example
+const p1 = new Promise(res => setTimeout(() => res("P1"), 5000));
+const p2 = new Promise(res => setTimeout(() => res("P2"), 1000));
+
+Promise.race([p1, p2])
+  .then(res => console.log(res));
+
+Output
+P2
+
+Rejection case
+Promise.race([
+  Promise.reject("Failed fast"),
+  Promise.resolve("Success later")
+]).catch(err => console.log(err));
+
+Output
+Failed fast
+
+5️⃣ Promise.any() 🟢 (First success wins)
+What it does
+Resolves with first fulfilled promise
+Ignores rejected ones
+Rejects only if ALL fail
+
+Syntax
+Promise.any([p1, p2, p3]);
+
+Example
+Promise.any([
+  Promise.reject("Error 1"),
+  Promise.resolve("Success"),
+  Promise.reject("Error 2")
+])
+.then(res => console.log(res));
+
+Output
+Success
+
+All rejected case
+Promise.any([
+  Promise.reject("A"),
+  Promise.reject("B")
+])
+.catch(err => {console.log(err); console.log(err.errors)});
+
+Output
+AggregateError: All promises were rejected
+['A','B']
+
+
+19 ------   this keyword in JavaScript 🔥
+
+1️⃣ this in Global Space
+Browser
+console.log(this);
+
+Output:
+window
+
+Node.js
+console.log(this);
+
+Output:
+{}
+
+2️⃣ this inside a Function (Non-Strict Mode)
+function x() {
+  console.log(this);
+}
+x();
+
+Output (browser):
+window
+👉 Because function is called in global context.
+
+3️⃣ this inside a Function (Strict Mode)
+"use strict";
+function x() {
+  console.log(this);
+}
+x();
+
+Output:
+undefined
+✔ Strict mode prevents default binding to window.
+
+4️⃣ this Depends on HOW a Function is Called ⭐
+function sayName() {
+  console.log(this.name);
+}
+
+const user1 = { name: "Akshay", sayName };
+const user2 = { name: "Bhushan", sayName };
+
+user1.sayName();
+user2.sayName();
+
+Output:
+Akshay
+Bhushan
+
+👉 this = object before the dot (.)
+
+5️⃣ this inside an Object Method
+const obj = {
+  name: "Namaste JS",
+  print() {
+    console.log(this.name);
+  }
+};
+obj.print();
+
+Output:
+Namaste JS
+
+6️⃣ this inside Nested Objects
+const obj = {
+  name: "Outer",
+  inner: {
+    name: "Inner",
+    print() {
+      console.log(this.name);
+    }
+  }
+};
+obj.inner.print();
+
+Output:
+Inner
+✔ Nearest object wins.
+
+7️⃣ this inside Arrow Function 🚨
+const obj = {
+  name: "Akshay",
+  print: () => {
+    console.log(this.name);
+  }
+};
+obj.print();
+
+Output:
+undefined
+❌ Arrow functions don’t have their own this.
+
+8️⃣ Correct Use of Arrow Function with this
+const obj = {
+  name: "Akshay",
+  print() {
+    const arrow = () => {
+      console.log(this.name);
+    };
+    arrow();
+  }
+};
+obj.print();
+
+Output:
+Akshay
+✔ Arrow inherits this from parent method.
+
+9️⃣ this in DOM Event Handler
+<button onclick="console.log(this)">Click</button>
+Output (on click):
+<button>Click</button>
+✔ this = HTML element.
+
+🔟 this with call
+function greet(city) {
+  console.log(this.name + " from " + city);
+}
+greet.call({ name: "Akshay" }, "Delhi");
+
+Output:
+Akshay from Delhi
+
+1️⃣1️⃣ this with apply
+greet.apply({ name: "Akshay" }, ["Mumbai"]);
+
+Output:
+Akshay from Mumbai
+
+1️⃣2️⃣ this with bind
+const greetFn = greet.bind({ name: "Akshay" }, "Pune");
+greetFn();
+
+Output:
+Akshay from Pune
+✔ bind returns a new function.
+
+1️⃣3️⃣ this inside a Class
+class User {
+  constructor(name) {
+    this.name = name;
+  }
+  print() {
+    console.log(this.name);
+  }
+}
+const u = new User("Namaste");
+u.print();
+
+Output:
+Namaste
+
+✔ this refers to the class instance.
+
+⭐ FINAL REVISION TABLE (WITH OUTPUT LOGIC)
+Context	this value
+Global (browser)	window
+Function (strict)	undefined
+Object method	Object itself
+Arrow function	Parent this
+DOM handler	HTML element
+Class method	Instance
+
+20 ------ call, apply, bind
+1️⃣ Why call, apply, bind?
+They are used to:
+Manually set the value of this
+Borrow methods from another object
+Control function execution context
+
+2️⃣ call() – Invoke immediately (comma-separated args)
+Syntax
+functionName.call(thisArg, arg1, arg2, ...);
+
+Example
+function greet(city) {
+  console.log(this.name + " from " + city);
+}
+const user = { name: "Bhushan" };
+greet.call(user, "Mumbai");
+
+Output:
+Bhushan from Mumbai
+
+3️⃣ apply() – Invoke immediately (array args)
+Syntax
+functionName.apply(thisArg, [arg1, arg2, ...]);
+
+Example
+greet.apply(user, ["Pune"]);
+
+Output:
+Bhushan from Pune
+
+4️⃣ bind() – Returns a new function (does NOT invoke)
+Syntax
+const newFn = functionName.bind(thisArg, arg1, arg2, ...);
+
+Example
+const greetUser = greet.bind(user, "Delhi");
+greetUser();
+
+Output:
+Bhushan from Delhi
+
+6️⃣ Function Borrowing Example 🔥
+const user1 = {
+  name: "Akshay",
+  print() {
+    console.log(this.name);
+  }
+};
+const user2 = {
+  name: "Bhushan"
+};
+user1.print.call(user2);
+
+Output:
+Bhushan
+
+✔ Method borrowed using call
+7️⃣ Partial Application using bind
+function multiply(a, b) {
+  console.log(a * b);
+}
+
+const double = multiply.bind(null, 2);
+double(5);
+
+Output:
+10
+
+8️⃣ Interview One-Liners 🔥
+call & apply invoke immediately
+bind returns a new function
+apply accepts arguments as array
+Used to control this explicitly
+
+21 ------ Currying
+1️⃣ What is Currying?
+Currying is a technique where:
+A function with multiple arguments is transformed into a sequence of functions, each taking one argument at a time.
+
+Normal function
+function add(a, b) {
+  return a + b;
+}
+
+Curried version
+function add(a) {
+  return function (b) {
+    return a + b;
+  };
+}
+
+2️⃣ Why Currying?
+Currying helps with:
+Reusability
+Partial application
+Cleaner functional code
+Avoiding repetition
+
+3️⃣ Basic Currying Example
+function multiply(a) {
+  return function (b) {
+    return a * b;
+  };
+}
+
+multiply(2)(3);
+
+Output:
+6
+
+4️⃣ Currying using Arrow Functions
+const multiply = a => b => a * b;
+multiply(4)(5);
+
+Output:
+20
+
+5️⃣ Real Use Case (Partial Application) ⭐
+const multiply = a => b => a * b;
+const double = multiply(2);
+const triple = multiply(3);
+double(5);
+triple(5);
+
+Output:
+10
+15
+
+✔ Functions created with preset values
+
+6️⃣ Currying using bind() (Interview Favorite 🔥)
+function add(a, b) {
+  return a + b;
+}
+
+const addFive = add.bind(null, 5);
+addFive(10);
+
+Output:s
+15
+👉 bind fixes the first argument.
+
+22 ------   Pure Function and Impure Function
+
+function pureadd(a,b){ return a+b}
+
+let n =10;
+function impureAdd(a){ return a+n}
+
+23 ------ Debouncing
+
+Debouncing is a technique used to limit how often a function executes.
+The function is called only after a specified delay once the user stops triggering an event.
+Used 
+Search input (API call after user stops typing)
+Window resize handler
+Button click protection
+Scroll-based actions
+
+🧩 Basic Debounce Function
+function debounce(fn, delay) {
+  let timerId;
+
+  return function (...args) {
+    clearTimeout(timerId);
+    timerId = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  };
+}
+
+🧪 Example: Search Input Debouncing
+function fetchResults(query) {
+  console.log("API Call with:", query);
+}
+
+const debouncedSearch = debounce(fetchResults, 500);
+
+// Simulating typing
+debouncedSearch("H");
+debouncedSearch("He");
+debouncedSearch("Hel");
+debouncedSearch("Hell");
+debouncedSearch("Hello");
+⏱ Output
+API Call with: Hello
+✔ Only one API call, after 500ms of no typing.
+
+<input onkeyup="onTextChange(event.target.value)" />
+const getData = (value)=>{
+ console.log(value)
+}
+
+const debounce = (fn,delay) => {
+ let timerId;
+ return function(...args){
+  clearTimeout(timerId)
+  timerId = setTimeout(()=>{
+   fn.apply(this,args)
+  },delay)
+ }
+}
+
+const onTextChange = debounce(getData,300);
+
+24 ------ Throttling 
+
+Throttling is a technique where a function is allowed to execute at most once in a specified time interval, no matter how many times the event is triggered.
+👉 Even if the event fires continuously, the function runs at a controlled rate.
+🧠 Why Throttling is Needed
+Some browser events fire very frequently:
+scroll
+resize
+mousemove
+
+Without throttling, these can:
+Hurt performance
+Cause unnecessary DOM updates
+Overload APIs
+
+🔍 Real-World Use Cases
+📜 Scroll event (infinite scroll)
+📏 Window resize
+🖱️ Mouse move tracking
+🎮 Game input handling
+⚙️ How Throttling Works (Concept)
+
+Event fires
+If function is not locked, it executes
+Function is blocked for the delay duration
+After delay, function can execute again
+
+🧩 Basic Throttle Function
+function throttle(fn, delay) {
+  let lastCall = 0;
+
+  return function (...args) {
+    const now = Date.now();
+
+    if (now - lastCall >= delay) {
+      lastCall = now;
+      fn.apply(this, args);
+    }
+  };
+}
+
+🧪 Example: Scroll Event Throttling
+function onScroll() {
+  console.log("Scroll event triggered");
+}
+const throttledScroll = throttle(onScroll, 1000);
+window.addEventListener("scroll", throttledScroll);
+
+⏱ Output
+Scroll event triggered
+// max once every 1 second
+✔ Even if you scroll continuously, the function runs once per second.
+
+🧪 Example: Button Click Throttling
+<button onclick="buttonClicked()">Click</button>
+
+let count = 0;
+const handleClicked = () =>{
+ console.log("Click",count);
+}
+
+const throttle = (fn,delay) =>{
+ let lastcall = true;
+ return function(){
+   count++;
+   console.log(count);
+   if(lastcall){
+    lastcall = false;
+    setTimeout(() => {
+     handleClicked();
+     lastcall = true;
+    },delay)
+   }
+ }
+}
+const buttonClicked = throttle(handleClicked,1000);

@@ -1,0 +1,15 @@
+Dear Hiring Manager,
+
+I hope you are doing well.
+
+I am writing to apply for the **[Job Title]** position at **[Company Name]**. I have attached my resume for your review.
+
+With over **3 years of experience in frontend development** using technologies such as **React, React Native, Angular, and JavaScript**, I have worked on building scalable, high-performance web and mobile applications. I believe my skills and experience would be a good fit for this role.
+
+Thank you for your time and consideration. I look forward to hearing from you.
+
+Kind regards,
+**Bhushan Malave**
+📞 +91-7795287943
+📧 [malavebhushan3226@gmail.com](mailto:malavebhushan3226@gmail.com)
+🔗 LinkedIn | GitHub
