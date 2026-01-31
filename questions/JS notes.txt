@@ -426,10 +426,6 @@ A.  When we creating a function  & put some variabels in this ( ) that is our Pa
        For Ex - ab( 4, 5 );
 
 6.  What is First Class Function Or First class citizens?
-A.   The Ability to use function as value,
-*     Can be passed as an Argument,
-*     Can be executed inside a closured function &
-*     Can be taken as return form.
        For Ex - var b = function(param){
                              return function xyz(){
                                      console.log(" F C F ");
@@ -462,7 +458,6 @@ function createMultiplier(multiplier) {
 
 const double = createMultiplier(2);
 console.log(double(5)); // 10
-
 
 7. Function are heart of JS. They are called first class citizens or first class functions because they have the ability to be stored in the variables, passed as parameters and arguments. They can also be returned in the function.
 
@@ -510,9 +505,6 @@ attachEventListiner();
 5. Micro task is given priority over callback tasks.
 6. Too many micro tasks generated can cause Starvation (nit giving time to callback tasks to execute).
 
-
-1) When does the event loop actually start ? Are only asynchronous web api callbacks are registered in web api environment ? Does the web api environment stores only the callback function and pushes the same callback to queue/microtask queue? How does it matter if we delay for setTimeout would be 0ms. Then callback will move to queue without any wait ?
-Ans - 
 1. When does the event loop actually start? - Event loop, as the name suggests, is a single-thread, loop that is `almost infinite`. It's always running and doing its job. ❤️
 2.  Are only asynchronous web API callbacks are registered in the web API environment? - YES, the synchronous callback functions like what we pass inside map, filter, and reduce aren't registered in the Web API environment. It's just those async callback functions that go through all this.
 

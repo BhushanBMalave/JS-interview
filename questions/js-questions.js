@@ -27,10 +27,11 @@ console.log("8" > 16) // false convert str to num
 console.log(""> -1) // true js converts "" to 0
 console.log("MD">16) // false js converts "MD" to NaN
 
+/////
 const crazy = ++[[]][+[]]+[+[]]; // ++0 [0]+[0] -> 10
 console.log(crazy); // 10
 
-
+/////
 function sayHi() {
     console.log(name); // undefined due to hoisting
     console.log(age); // ReferenceError: Cannot access 'age' before initialization
@@ -39,6 +40,7 @@ function sayHi() {
 }
 sayHi();
 
+/////
 for (var i = 0; i<3; i++) {
      setTimeout(() => console.log(i), 1000);
  }
@@ -63,6 +65,7 @@ for (let j = 0; j<3; j++) {
 }
 // Outputs 0, 1, 2 because 'let' is block-scoped and each iteration of the loop captures a new binding of 'j'.
 
+/////
 let temp = {
  a:10,
  b:20,
@@ -81,6 +84,7 @@ temp.sum(); // NaN because arrow functions do not have their own 'this', so 'thi
 temp.multi(); // 200 because regular functions have their own 'this' which refers to the 'temp' object.
 temp.sumRegular(); // 30 because regular functions have their own 'this' which refers to the 'temp' object.
 
+/////
 const bird ={
     size: "small"
 }
@@ -93,31 +97,36 @@ console.log(mouse["bird"]["size"]); // TypeError: Cannot read properties of unde
 console.log(mouse[bird["size"]]); // undefined because bird["size"] is "small" and mouse["small"] is true
 console.log(mouse[bird.size]); // true because bird.size is "small" and mouse["small"] is true
 
+/////
 let c = { greeting : "Hey!" };
 let d;
 d = c;
 c.greeting = "Hello";
 console.log(d.greeting); // Outputs "Hello" because 'd' references the same object as 'c'.
 
+/////
 let a = 3;
 let b = new Number(3);
 console.log(a == b); // true because 'b' is coerced to the primitive value 3
 console.log(a === b); // false because 'a' is a primitive and 'b' is an object
-
+/////
 console.log("5" + 3); // "53" because the number 3 is coerced to a string
 console.log("5" - 3); // 2 because the string "5" is coerced to a number
 console.log("5" * "2"); // 10 because both strings are coerced to numbers
 console.log("6" / "2"); // 3 because both strings are coerced to numbers
 
+/////
 let greeting;
 greetingn ={}
 console.log(greetingn);
 // {} because wrong spelling taken as Var variable by default
 
+/////
 sum = (a, b) => a + b;
 console.log(sum(2, '3'));
 // Outputs '23' because the '+' operator concatenates a number and a string.
 
+/////
 console.log(typeof null); // "object" because in JavaScript, null is considered an object type due to legacy reasons.
 console.log(typeof undefined); // "undefined" because undefined is a primitive type that indicates a variable has not been assigned a value. 
 console.log(typeof NaN); // "number" because NaN (Not-a-Number) is a special numeric value that represents an undefined or unrepresentable value in mathematics.
@@ -125,35 +134,44 @@ console.log(typeof []); // "object" because arrays are a type of object in JavaS
 console.log(Array.isArray([])); // true because Array.isArray() is a method that checks if the provided value is an array.
 console.log([] instanceof Array); // true because the instanceof operator checks if the prototype property of a constructor appears anywhere in the prototype chain of an object.
 
+/////
 let x = 0;
 console.log(x++); // Outputs 0 because the post-increment operator returns the value before incrementing.
 console.log(++x); // Outputs 2 because the pre-increment operator increments the value first and then returns it.
 
+/////
 console.log(eval('10*10+5')); // Outputs 105 because eval evaluates the string as JavaScript code.
 
+/////
 <div onClick="console.log('div')">
   <p onClick="console.log('p')"> Click me </p>
 </div>
 // When the paragraph is clicked, it will log 'p' first and then 'div' due to event bubbling. -A becoz by default it event bubbleing where events executes from child to parent.In case of event caputuring its from parent to child execution of events
 
+/////
 var num = 8;
 var num = 10;
 console.log(num); // Outputs 10 because 'var' allows redeclaration and the last assignment takes effect.
 
+/////
 const obj = { a :'one', b: 'two', a: 'three' };
 console.log(obj); // { a: 'three', b: 'two' } because in object literals, duplicate keys are overwritten by the last occurrence.
 
+/////
 for (let i = 0; i < 5; i++) {
  if(i === 3) continue;
  console.log(i);
 }
 // Outputs 0, 1, 2, 4 because when i is 3, the continue statement skips the rest of the loop body for that iteration.
 
+/////
 console.log(typeof typeof 1); // "string" because typeof 1 is "number", and typeof "number" is "string".
 
+/////
 let xy = [...'Lydia'];
 console.log(xy); // ['L', 'y', 'd', 'i', 'a'] because the spread operator splits the string into individual characters and creates an array from them.
 
+/////
 function getAge(){
  'use strict';
  age = 25;
@@ -161,7 +179,7 @@ function getAge(){
 }
 getAge(); // ReferenceError: age is not defined because in strict mode, assigning a value to an undeclared variable throws an error.
 
-
+/////
 let person = { name :'Alice' };
 let member = person;
 let mem = [person];
@@ -169,6 +187,7 @@ person = null;
 console.log(member); // Outputs { name: 'Alice' } because 'member' still references the original object even after 'person' is set to null.
 console.log(mem); // Outputs [{ name: 'Alice' }] because 'mem' is an array that contains a reference to the original object.
 
+/////
 function getAge(...args) {
     console.log(typeof args);
     console.log(args);
@@ -180,6 +199,7 @@ function getAge1(args) {
 getAge(21); // "object" [ 21 ] because the rest parameter 'args' is an array containing the arguments passed to the function.
 getAge1(21); // "number" 21 because 'args' is a single parameter that receives the value passed to the function.
 
+/////
 const data = {
  name: "Test",
  age: 25,
@@ -187,6 +207,7 @@ const data = {
 }
 console.table(data); // Displays the 'data' object in a table format in the console for better readability.
 
+/////
 const str = "Hello Bhushan, How are you?";
 console.log(str.split(" ")[1]); // Outputs "Bhushan," because split(" ") divides the string at each space and the second element (index 1) is "Bhushan,".
 console.log(str.slice(6, 14)); // Outputs "Bhushan," because slice(6, 14) extracts characters from index 6 to 13.
@@ -225,8 +246,7 @@ console.log(ab + 5); // Outputs 5 because null is coerced to 0, so null + 5 beco
 console.log(cb + "5"); // Outputs "null5" because null is coerced to the string "null", so null + "5" becomes "null" + "5".
 console.log(ab === cb); // Outputs true because both ab and cb are null, and strict equality checks for both value and type.
 
-
-// Spread operator and Rest operator
+///// Spread operator and Rest operator
 let num1 = [1,2,3,4,5];
 let num2 = [6,7,8,9,0];
 let finalNum = [...num1,...num2];
@@ -237,6 +257,7 @@ function addArr(...numbers){
 
 console.log(finalNum); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]  spread 
 console.log(addArr(num1,num2)); // [[1,2,3,4,5],[6,7,8,9,0]] Rest
+
 ///// Object keys
 let a1 = {}
 let b2 = {key:"123"}
@@ -291,7 +312,7 @@ function bi(){
 }
 
 const bin = bi.bind({name:'Bhushan'}).bind({name: "Malave"});
-bin(); // Bhushan  function gets bind to first object there is bind chaining. 
+bin(); // Bhushan  function gets bind to first object there is no bind chaining. 
 
 /////
 for(var i=1;i<=3;i++){
@@ -310,11 +331,11 @@ for(var i=1;i<=3;i++){
 var abc = "abc";
 function callhost(){
     abc = "xyz"
-    //function abc() {};
+    function abc() {};
     return;
 }
 callhost();
-console.log(abc); // abc because fuction and variable have same name in local scope and function get hoisted above variable. if we comment func then xyz will be output.
+console.log(abc); // abc func because fuction and variable have same name in local scope and function get hoisted above variable. if we comment func then xyz will be output.
 
 /////
 const numb = [1,2,3,4];
