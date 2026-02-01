@@ -261,11 +261,7 @@ let frequency = {}
 
 for( let s of str1){
  if(/[a-zA-Z]/.test(s)){
-   if(!frequency[s]){
-  frequency[s] = 1;
- } else {
-  frequency[s] = frequency[s] + 1;
- }
+   frequency[s] = (frequency[s] || 0) +1;
  }
 }
 console.log(frequency)
@@ -685,3 +681,58 @@ function converToUppercase(str){
  }
  return result;
 }
+
+/// 49 Check Anagram in JavaScript
+
+let ana1 = "slieyt";
+let ana2 = "listen";
+
+function checkAnagram(str1,str2){
+  const format = str => 
+    str.toLowerCase().split("").sort().join("");
+
+  return (format(str1) === format(str2)) ?
+    console.log("Anagram") :
+    console.log("Not Anagram");
+
+}
+
+function checkAnagram2(str1,str2){
+  let freq= {};
+
+  if(str1.length !== str2.length) return console.log("Not Anagram");
+
+  for(let i =0; i< str1.length; i++){
+    freq[str1[i]] = (freq[str1[i]] || 0) + 1;
+  }
+
+  for(let s in str2){
+    if(!freq[s]) return console.log("Not Anagram");
+    freq[s]--;
+  }
+  return console.log('Anagram');
+}
+
+checkAnagram(ana1,ana2)
+checkAnagram2(ana1,ana2)
+
+/// 50 Pig Latin
+
+let pig = "cheese";
+word.substring
+function pigLatin(str) {
+  const vowels = ['a','e','i','o','u'];
+ 
+   for(let i = 0; i <= str.length; i++){
+    if(vowels.includes(str[i])){
+      const substr1 = str.substring(0,i);
+      console.log(substr1);
+      
+      const substr2 = str.substring(i);
+      console.log(substr2);
+      return substr2 + substr1 + "ay";
+    }
+   }
+}
+
+console.log(pigLatin(pig));
