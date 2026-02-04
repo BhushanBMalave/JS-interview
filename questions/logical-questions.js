@@ -726,13 +726,125 @@ function pigLatin(str) {
    for(let i = 0; i <= str.length; i++){
     if(vowels.includes(str[i])){
       const substr1 = str.substring(0,i);
-      console.log(substr1);
-      
       const substr2 = str.substring(i);
-      console.log(substr2);
       return substr2 + substr1 + "ay";
     }
    }
 }
 
 console.log(pigLatin(pig));
+
+/// 51 Two sum problem
+
+const arr = [1,7,11,5,2];
+const target = 18;
+let map ={}
+
+for(let i = 0; i < arr.length; i++){
+ let diff = target - arr[i];
+ if(map[diff] !== undefined){
+   console.log(map[diff],i); // 1,2
+ }
+ map[arr[i]] = i;
+}
+
+/// 52 Counting Bits
+
+function countingBits(n) {
+  const binary = n.toString(2); // convert to binary string 
+  console.log(binary); // 10111
+  let result = [];
+  let count = 0;
+
+  for (let i = 0; i < binary.length; i++) {
+    if (binary[i] === '1') {
+      count++;
+      result.push(i + 1); // positions start from 1
+    }
+  }
+
+  return [count, ...result];
+}
+console.log(countingBits(23));
+
+/// 53 Romanizer
+
+function romanizer(numbers) {
+  const values = [
+    1000, 900, 500, 400,
+    100, 90, 50, 40,
+    10, 9, 5, 4, 1
+  ];
+
+  const symbols = [
+    "M", "CM", "D", "CD",
+    "C", "XC", "L", "XL",
+    "X", "IX", "V", "IV", "I"
+  ];
+
+  return numbers.map(num => {
+    let roman = "";
+
+    for (let i = 0; i < values.length; i++) {
+      while (num >= values[i]) {
+        roman += symbols[i];
+        num -= values[i];
+      }
+    }
+
+    return roman;
+  });
+}
+
+console.log(romanizer([1, 49, 23])) // ['I', 'XLIX', 'XXIII']
+
+/// 54 classic frequency / palindrome feasibility problem
+
+function minDeletionsToMakePalindrome(s) {
+  const freq = {};
+  
+  for (const ch of s) {
+    freq[ch] = (freq[ch] || 0) + 1;
+  }
+
+  let oddCount = 0;
+  for (const count of Object.values(freq)) {
+    if (count % 2 !== 0) {
+      oddCount++;
+    }
+  }
+
+  return Math.max(0, oddCount - 1);
+}
+
+console.log(minDeletionsToMakePalindrome("adssdsc")); // 2
+console.log(minDeletionsToMakePalindrome("kjdnk"));  // 2
+console.log(minDeletionsToMakePalindrome("aaabcceqd")); //3
+
+/*✅ Strategy
+Count frequency of each character.
+Count how many characters have odd frequency → oddCount
+Minimum deletions required:
+max(0, oddCount - 1) */
+
+
+/// 55  classic sliding window / two-pointers problem
+
+function maximumRequests(window, timestamps) {
+  let left = 0;
+  let maxCount = 0;
+
+  for (let right = 0; right < timestamps.length; right++) {
+    while (timestamps[right] - timestamps[left] > window - 1) {
+      left++;
+    }
+    maxCount = Math.max(maxCount, right - left + 1);
+  }
+
+  return maxCount;
+}
+
+window = 3
+timestamps = [1, 2, 3, 8, 10]
+
+console.log(maximumRequests(window,timestamps)) // 5

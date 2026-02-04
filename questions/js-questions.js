@@ -117,7 +117,7 @@ console.log("6" / "2"); // 3 because both strings are coerced to numbers
 
 /////
 let greeting;
-greetingn ={}
+greetingn = {}
 console.log(greetingn);
 // {} because wrong spelling taken as Var variable by default
 
@@ -134,7 +134,8 @@ console.log(typeof []); // "object" because arrays are a type of object in JavaS
 console.log(Array.isArray([])); // true because Array.isArray() is a method that checks if the provided value is an array.
 console.log([] instanceof Array); // true because the instanceof operator checks if the prototype property of a constructor appears anywhere in the prototype chain of an object.
 
-/////
+/////.3
++
 let x = 0;
 console.log(x++); // Outputs 0 because the post-increment operator returns the value before incrementing.
 console.log(++x); // Outputs 2 because the pre-increment operator increments the value first and then returns it.

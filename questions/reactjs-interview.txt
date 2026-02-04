@@ -335,214 +335,6 @@ Error boundaries (older pattern)
 A Higher Order Component is a function that takes a component and returns a new component with added functionality, enabling code reuse and separation of concerns.
 
 3) Life Cycle Methods of Components:
-3️⃣ Life Cycle Methods of Components (Class Components)
-🔹 What are Life Cycle Methods?
-
-Life cycle methods are special methods in class components that get executed at different stages of a component’s life.
-
-From creation → update → removal of a component in the DOM.
-
-🔹 Class Component Structure
-class Example extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    return <div>Hello</div>;
-  }
-}
-
-🔹 Life Cycle Phases
-
-Mounting – Component is created & added to DOM
-
-Updating – Component re-renders due to changes
-
-Unmounting – Component is removed from DOM
-
-🔵 1. Mounting Phase
-Order of Execution
-
-constructor()
-
-render()
-
-componentDidMount()
-
-🔹 constructor()
-
-Initialize state
-
-Bind methods
-
-constructor(props) {
-  super(props);
-  this.state = { count: 0 };
-}
-
-🔹 render()
-
-Returns JSX
-
-Must be pure
-
-Called every render
-
-render() {
-  return <h1>{this.state.count}</h1>;
-}
-
-🔹 componentDidMount()
-
-Called once after first render
-
-Ideal for:
-
-API calls
-
-Subscriptions
-
-DOM manipulation
-
-componentDidMount() {
-  console.log("Component Mounted");
-}
-
-🟡 2. Updating Phase
-Triggered when:
-
-state changes
-
-props change
-
-Important Methods
-🔹 shouldComponentUpdate()
-
-Controls re-rendering
-
-Returns true or false
-
-shouldComponentUpdate(nextProps, nextState) {
-  return nextState.count !== this.state.count;
-}
-
-🔹 componentDidUpdate()
-
-Called after update
-
-Used for:
-
-API calls on prop change
-
-DOM updates
-
-componentDidUpdate(prevProps, prevState) {
-  if (prevState.count !== this.state.count) {
-    console.log("Count updated");
-  }
-}
-
-Execution Order (Updating)
-
-render()
-
-componentDidUpdate()
-
-🔴 3. Unmounting Phase
-🔹 componentWillUnmount()
-
-Called before component removal
-
-Used for cleanup:
-
-Clear timers
-
-Remove event listeners
-
-Cancel API calls
-
-componentWillUnmount() {
-  console.log("Component Unmounted");
-}
-
-🧩 Complete Example
-class LifeCycleDemo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { count: 0 };
-  }
-
-  componentDidMount() {
-    console.log("Mounted");
-  }
-
-  componentDidUpdate() {
-    console.log("Updated");
-  }
-
-  componentWillUnmount() {
-    console.log("Unmounted");
-  }
-
-  render() {
-    return (
-      <>
-        <p>{this.state.count}</p>
-        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
-          Increment
-        </button>
-      </>
-    );
-  }
-}
-
-🔁 Lifecycle Methods vs Hooks (Mapping)
-Class Lifecycle	Hook Equivalent
-componentDidMount	useEffect(() => {}, [])
-componentDidUpdate	useEffect(() => {}, [deps])
-componentWillUnmount	useEffect(() => return cleanup)
-❌ Deprecated Lifecycle Methods
-
-(Not commonly asked, but good to know)
-
-componentWillMount
-
-componentWillReceiveProps
-
-componentWillUpdate
-
-🔥 Common Interview Questions
-
-Q: Which lifecycle method is used for API calls?
-✔ componentDidMount
-
-Q: Which method is used for cleanup?
-✔ componentWillUnmount
-
-Q: Which method controls re-rendering?
-✔ shouldComponentUpdate
-
-✅ One-Line Interview Answer
-
-React lifecycle methods are special methods in class components that allow developers to run code at specific stages like mounting, updating, and unmounting.
-
-If you want, next I can cover:
-
-Controlled vs Uncontrolled Components
-
-Render Props
-
-React.memo & Performance
-
-Error Boundaries
-
-Redux vs Context
-
-Just say next topic 🚀
-
-3) Life Cycle Methods of Components:
 Class Components: Traditional React components using ES6 classes.
 Mounting: Component is being created and inserted into the DOM.
 Updating: Component is being re-rendered as a result of changes.
@@ -861,9 +653,9 @@ Direct access to data
 🔥 Props Drilling vs Context
 Feature	        Props       Drilling	Context
 Data passing	   Manual	     Automatic
-Maintainability	Poor       	Better
+Maintainability	 Poor       	Better
 Best for	       Small apps	 Medium/large apps
-Performance	    Better	Can cause re-renders
+Performance	     Better	     Can cause re-renders
 
 🧠 Real-World Example: Theme Context
 const ThemeContext = React.createContext();
@@ -907,7 +699,6 @@ Q: Does Context replace Redux?
 State management in React deals with how data is stored, passed, and shared across components using state, props, props drilling, and Context API.
 
 5) Redux
-
 🔹 What is Redux?
 Redux is a predictable state container for JavaScript applications that provides a single source of truth for the entire app.
 All application state is stored in one global store.
@@ -1322,7 +1113,6 @@ function App() {
 
 🟢 3. React.Suspense
 🔹 What is Suspense?
-
 Suspense allows React to:
 Pause rendering
 Show a fallback UI
@@ -1636,18 +1426,18 @@ SSR → Search engines see full content
 
 Performance
 Metric	                   CSR	                             SSR
-Initial load	             Slower	                          Faster
-TTI (Time to Interactive)	Faster	                          Slightly slower
-Subsequent navigation	    Faster                          	Fast
+Initial load	             Slower	                           Faster
+TTI (Time to Interactive)	 Faster	                           Slightly slower
+Subsequent navigation	     Faster                          	 Fast
 
 🔁 CSR vs SSR (Comparison Table)
-Feature	                     CSR	                          SSR
+Feature	                      CSR	                          SSR
 Rendering location	          Browser	                      Server
 Initial HTML	                Empty	                        Fully rendered
-SEO	                         Poor	                         Excellent
-First load	                  Slower	                       Faster
-Complexity	                  Simple	                       Complex
-Server cost	                 Low	                          Higher
+SEO	                          Poor	                        Excellent
+First load	                  Slower	                      Faster
+Complexity	                  Simple	                      Complex
+Server cost	                  Low	                          Higher
 
 🧠 Hydration (Important Interview Term)
 🔹 What is Hydration?
@@ -1861,10 +1651,7 @@ Q: How do you protect routes?
 ✅ One-Line Interview Answer
 Routing in React is handled using react-router, where protected and role-based routes ensure secure navigation, dynamic routing handles URL parameters, and query params pass optional data.
 
-
-
 11) Testing:
-
 🔹 Why Testing?
 Testing ensures that:
 Components work as expected

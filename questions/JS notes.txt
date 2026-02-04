@@ -323,7 +323,6 @@ clock();
 
 In earlier case, only x() was there which was getting called only once and then callback function  was called 6 times but all of them were having their parent as x() and hence all were pointing to same address(reference) of i.-> x is clock.
 
-
 1. An inner function can be directly called using two parenthesis ()().
 2. Even parameters can be passed this way (Remember that the function needs to be returned to do this)
 3. Closures can also be used for data hiding and encapsulation. So other code cannot access this value.
@@ -774,7 +773,6 @@ Improve readability and reuse
 They do not change the original array (immutable).
 
 2️⃣ map() – Transform each element
-
 👉 Used when you want to transform every item in an array.
 
 Syntax
@@ -791,7 +789,6 @@ Output
 ✔ Same length as original
 
 3️⃣ filter() – Select some elements
-
 👉 Used when you want to filter items based on a condition.
 
 Syntax
@@ -956,7 +953,6 @@ createOrder(cart)
 ✔ Clean
 ✔ Chainable
 ✔ Error handling in one place
-
 
 15 ------  Promise
 
@@ -1257,7 +1253,6 @@ End
 first start will print and after 4 sec all other logs will print. even though p2 is resolved after 2sec it will be executed after p1 is resolved.
 
 6️⃣ Does await block JavaScript? ❌
-
 ❌ await does NOT block the main thread
 ✔ It suspends only the async function
 
