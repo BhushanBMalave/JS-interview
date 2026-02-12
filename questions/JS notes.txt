@@ -123,7 +123,6 @@ see script in 7:03
 So in block " var a = 10;" influences the value within the block hence  console.log(a); >> 10 and outside of the block 'Variable in Global environment' influences value of a hence console.log(a); >> 100
 
 Illegal shadowing:
-
 let a = 200;
 {
  var a =20;
@@ -536,9 +535,7 @@ Callback is sent to a queue later call stack by event loop
 Even with 0ms, callback waits until:
 Call stack is empty
 
-
 Microtask Queue (Very Important ⭐)
-
 Higher priority queue than Callback Queue.
 Contains:
 Promise.then

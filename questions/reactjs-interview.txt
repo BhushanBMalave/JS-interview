@@ -150,9 +150,7 @@ Only for expensive calculations
 
 6️⃣ useCallback
 What is it?
-
 Memoizes functions
-
 Prevents unnecessary child re-renders
 
 Syntax

@@ -139,7 +139,7 @@ const arrayFlattern = (array) => {
  let flatarr = [];
  for(let i =0; i < array.length; i++){
   if(Array.isArray(array[i])){
-   arrayFlattern(array[i]);
+   flatarr = flatarr.concat(arrayFlattern(array[i]));
   } else {
    flatarr.push(array[i])
   }
@@ -163,27 +163,22 @@ let obj = {
  }
 }
 
-let flatObj = {};
-
-const flattenObject = (obj) => {
- for (let key in obj) {
-  if(typeof obj[key] === 'object'){
-   flattenObject(obj[key]);
+const flattenObject = (obj, result = {}) => {
+  for (let key in obj) {
+    if (typeof obj[key] === "object" && obj[key] !== null) {
+      flattenObject(obj[key], result);
+    } else {
+      result[key] = obj[key];
+    }
   }
-  else {
-   flatObj[key] = obj[key];
-  }
- }
- return flatObj;
-}
+  return result;
+};
 
-console.log("Flattened Object: ", flattenObject(obj));
-
+console.log("Flattened Object:", flattenObject(obj));
 // Output: 
 // Flattened Object:  { name: 'John', age: 30, depName: 'IT', empId: 101, empName: 'David' }
 
 /// 12. Convert Object Keys to Array | 3 Ways 
-
 let obj = {
  name: "John",
  age: 30,
@@ -848,3 +843,39 @@ window = 3
 timestamps = [1, 2, 3, 8, 10]
 
 console.log(maximumRequests(window,timestamps)) // 5
+
+/// 56 return unqiue elements from an array.
+
+let arr1 = [1,2,3];
+let arr2 = [2,3,4];
+let arr3 = [3,4,5];
+let arr4 = [5,6,7];
+
+function unqiueElements(...arr){
+    const uniqueArr = [];
+    const freq = {};
+    const flatarr = flatArray(arr);
+    for(let i = 0; i < flatarr.length; i++){
+        freq[flatarr[i]] = (freq[flatarr[i]] || 0 ) + 1;
+    }
+    for(let i in freq){
+        if(freq[i] === 1){
+            uniqueArr.push(i);
+        }
+    }
+    return uniqueArr;
+}
+
+const flatArray = (arr) => {
+    let flatarray = [];
+    for(let i = 0; i < arr.length; i++){
+        if(Array.isArray(arr[i])){
+            flatarray = flatarray.concat(flatArray(arr[i]));
+        } else {
+            flatarray.push(arr[i]);
+        }
+    }
+    return flatarray;
+}
+
+console.log(unqiueElements(arr1,arr2,arr3,arr4));
