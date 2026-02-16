@@ -514,3 +514,39 @@ console.log(combine2) // [3, 6, 9, 2, 4, 9]
 
 let setarray = [... new Set([...numArray, ...numArray2])];
 console.log(setarray) // [3, 6, 9, 2, 4]
+
+///// function length 
+function fruits(a,b,c){
+    return "hello ji";
+}
+console.log(fruits.length) // 3 it gives the length of parameters
+console.log(fruits().length) // 8 it gives the length of return string
+console.log(fruits(10,20).length) // 8 it gives the length of return string
+
+function fruits1(a,b,c=10){
+    return "hello ji";
+}
+console.log(fruits1.length) // 2 it gives the length of parameters before the parameter default value
+console.log(fruits1().length) // 8 it gives the length of return string
+console.log(fruits1(10,20).length) // 8 it gives the length of return string
+
+///// merge object 
+const object1 = {a:10,b:20,c:30,d:40};
+const object2 = {e:10,f:20,g:30,c:40};
+const object3 = {};
+let count = 0;
+
+for(let i in object1){
+ if(!(i in object3)){
+  count++;
+ }
+ object3[i] = object1[i];
+}
+for(let i in object2){
+ if(!(i in object3)){
+  count++;
+ }
+ object3[i] = object2[i];
+}
+console.log(object3); // {a: 10, b: 20, c: 40, d: 40, e: 10, …}
+console.log(count); // 7

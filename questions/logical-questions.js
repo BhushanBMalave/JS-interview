@@ -879,3 +879,20 @@ const flatArray = (arr) => {
 }
 
 console.log(unqiueElements(arr1,arr2,arr3,arr4));
+
+///  57 find the longest string in the sentence.
+
+const sent = "I love Javascript Programming hsdkjdbdsbkjdbdsbd";
+
+function longestString(sent){
+ const words = sent.split(" ");
+ let longestStr = words[0];
+
+ for( let str of words){
+  if(str.length > longestStr.length){
+   longestStr = str;
+  }
+ }
+ return longestStr;
+}
+console.log(longestString(sent)); // hsdkjdbdsbkjdbdsbd

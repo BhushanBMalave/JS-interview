@@ -2722,5 +2722,113 @@ Q: How do you avoid CSS conflicts?
 Q: How do you handle theming?
 ✔ CSS variables / MUI theme provider
 
+
+
 ✅ One-Line Summary
 React styling can be done using traditional CSS, utility-first frameworks, or component libraries, each chosen based on scalability, performance, and project needs.
+In React, writing HTML without JSX means using React.createElement() directly.
+This is a common interview question to check if you understand what JSX actually does behind the scenes.
+
+✅ 1. What is JSX?
+JSX is just syntactic sugar for React.createElement().
+This:
+const element = <h1>Hello World</h1>;
+
+Is converted (by Babel) into:
+const element = React.createElement('h1', null, 'Hello World');
+
+✅ 2. Writing HTML in React Without JSX
+Instead of writing HTML-like syntax, we use:
+React.createElement(type, props, ...children)
+
+🔹 Example 1 – Simple Element
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+const element = React.createElement(
+  'h1',
+  null,
+  'Hello World'
+);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(element);
+
+🔹 Example 2 – With Props (Attributes)
+JSX version:
+<a href="https://google.com">Google</a>
+
+Without JSX:
+const element = React.createElement(
+  'a',
+  { href: 'https://google.com' },
+  'Google'
+);
+
+🔹 Example 3 – Nested Elements
+JSX:
+<div>
+  <h1>Hello</h1>
+  <p>Welcome</p>
+</div>
+
+Without JSX:
+const element = React.createElement(
+  'div',
+  null,
+  React.createElement('h1', null, 'Hello'),
+  React.createElement('p', null, 'Welcome')
+);
+
+✅ 3. Functional Component Without JSX
+
+JSX:
+function App() {
+  return <h1>Hello React</h1>;
+}
+
+Without JSX:
+function App() {
+  return React.createElement('h1', null, 'Hello React');
+}
+
+✅ 4. Interview One-Line Answer
+How do you write HTML in React without JSX?
+👉 “In React, we can write HTML without JSX by using React.createElement(). JSX is just syntactic sugar that gets transpiled into React.createElement() calls.”
+
+✅ 5. Important Interview Points
+
+✔ JSX is not required to use React
+✔ JSX gets converted to React.createElement()
+✔ Babel does the conversion
+✔ React.createElement(type, props, children) creates a React element
+
+✅ 1️⃣ Simple Button (Without JSX)
+JSX version:
+<button>Click Me</button>
+
+Without JSX:
+const button = React.createElement(
+  'button',
+  null,
+  'Click Me'
+);
+
+✅ 2️⃣ Button With onClick Event
+👉 Event handlers are passed inside the props object (second parameter).
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+function handleClick() {
+  alert('Hello!');
+}
+
+const button = React.createElement(
+  'button',
+  { onClick: handleClick, style: { padding: '10px' } },
+  'Click Me'
+);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(button);
