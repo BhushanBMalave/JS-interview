@@ -550,3 +550,7 @@ for(let i in object2){
 }
 console.log(object3); // {a: 10, b: 20, c: 40, d: 40, e: 10, …}
 console.log(count); // 7
+
+///// Remove All Spaces from String
+const stringspace = "   Hello    World   ";
+const noSpace = stringspace.replace(/\s+/g,""); // HelloWorld

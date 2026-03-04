@@ -1,11 +1,6 @@
 📌 1️⃣ What is HTML?
 HTML (HyperText Markup Language) is the standard markup language used to create and structure web pages.
 
-Key Points:
-Defines structure, not logic
-Uses tags and elements
-Works with CSS (styling) and JavaScript (behavior)
-
 Example:
 <!DOCTYPE html>
 <html>
@@ -17,10 +12,6 @@ Example:
     <p>This is HTML</p>
   </body>
 </html>
-
-
-📌 Interview one-line answer:
-HTML is a markup language used to structure content on the web using tags and elements.
 
 📌 2️⃣ Difference between HTML and HTML5
 Feature	                    HTML	                    HTML5
@@ -148,11 +139,11 @@ Older browser behaviors are used
 (with JS placement – interview-ready explanation)
 
 🔹 <head> vs <body> – Core Difference
-<head>	<body>
-Contains metadata	Contains visible content
-Not shown on page	Shown on the page
-Helps browser & SEO	Helps users
-Loads before body	Rendered after head
+<head>	               <body>
+Contains metadata	     Contains visible content
+Not shown on page	     Shown on the page
+Helps browser & SEO	   Helps users
+Loads before body	     Rendered after head
 
 🔹 <head> Tag – What goes inside?
 The <head> section contains information about the document, not the content itself.
@@ -163,6 +154,7 @@ Common elements in <head>:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="HTML tutorial">
+  <script src="index.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 

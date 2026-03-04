@@ -71,16 +71,21 @@ for (let i = 0; i < nums.length; i++) {
 console.log("Average of numbers is ", total / nums.length);
 
 /// 7. Check if a string is a palindrome
-let strP = "racecar";
-let reversedStr = "";
-for (let i = strP.length - 1; i >= 0; i--) {
-    reversedStr += strP[i];
+let strP = "racecare";
+
+function checkPalindrom(str){
+ let left = 0;
+ let right = str.length - 1;
+ while(left < right){
+  if(str[left] !== str[right]){
+   return " String is not Palindrom";
+  }
+  left++;
+  right--;
+ }
+ return " String is Palindrom";
 }
-if (strP === reversedStr) {
-    console.log(strP + " is a palindrome.");
-} else {
-    console.log(strP + " is not a palindrome.");
-}
+console.log(checkPalindrom(strP)); // String is not Palindrom
 
 /// 8 a. Find the second largest number in an array
 let array = [12, 35, 1, 10, 34, 1];
@@ -200,7 +205,7 @@ Object.entries(obj).forEach(([key, value]) => {
 });
 console.log("Keys using Object.entries(): ", keysArray3); // ["name", "age", "city"]
 
-/// 13.  occurence of element in an array
+/// 13.  Occurence / Freuency of element in an array
 
 let occarray = [ 1,2,3,1,4,2,3,5,6,7];
 
@@ -214,19 +219,20 @@ console.log(obj) // { '1': 2, '2': 2, '3': 2, '4': 1, '5': 1, '6': 1, '7': 1 }
 
 /// 14 Move All Zeros to End of Array
 
-let arr = [0, 1, 0, 3, 12];
-let index = 0;
-
-for(let i = 0 ; i < arr.length; i++){
- if(arr[i] !== 0){
-  arr[index] = arr[i];
-  index++;
- }
+let arrZero = [0, 1, 0, 3, 12];
+function moveZeros(arr) {
+  let index = 0;
+  for(let i = 0; i < arr.length; i++){
+    if(arr[i] !== 0){
+      let temp = arr[index];
+      arr[index] = arr[i];
+      arr[i] = temp;
+      index++;
+    }
+  }
+  return arr;
 }
- for( i = index; i < arr.length; i++){
-  arr[i] = 0;
- }
-console.log(arr); // [1,3,12,0,0]
+console.log(moveZeros(arrZero)); // [1,3,12,0,0]
 
 
 /// 15 Count Words in a String in JavaScript 
@@ -234,10 +240,9 @@ console.log(arr); // [1,3,12,0,0]
 let str = 'Hi how  .  ,   are you';
 let count = 0;
 let isWord = false;
-
 for(let i=0; i < str.length; i++){
   // Check if character is a letter
-  if (/[a-zA-Z]/.test(str[i])) {
+  if (/[a-zA-Z0-9]/.test(str[i])) {
     if (!isWord) {
       count++;
       isWord = true;
@@ -246,7 +251,6 @@ for(let i=0; i < str.length; i++){
     isWord = false;
   }
 }
-
 console.log(count); // 4
 
 /// 16 Count the frequency of each element in string
@@ -727,7 +731,7 @@ function pigLatin(str) {
    }
 }
 
-console.log(pigLatin(pig));
+console.log(pigLatin(pig)); // eesechay
 
 /// 51 Two sum problem
 
@@ -757,10 +761,9 @@ function countingBits(n) {
       result.push(i + 1); // positions start from 1
     }
   }
-
   return [count, ...result];
 }
-console.log(countingBits(23));
+console.log(countingBits(23)); // [4,1,3,4,5]
 
 /// 53 Romanizer
 
@@ -835,10 +838,8 @@ function maximumRequests(window, timestamps) {
     }
     maxCount = Math.max(maxCount, right - left + 1);
   }
-
   return maxCount;
 }
-
 window = 3
 timestamps = [1, 2, 3, 8, 10]
 
@@ -896,3 +897,38 @@ function longestString(sent){
  return longestStr;
 }
 console.log(longestString(sent)); // hsdkjdbdsbkjdbdsbd
+
+/// 58 Run-Length Encoding 
+
+let inpStr = "aaaabbbcccd";
+
+function compressString(string){
+ let result = "";
+ count = 1;
+
+ for(let i = 1; i <= string.length; i++){
+  if(string[i] === string[i-1]){
+   count++;
+  } else {
+   result += string[i-1]+count;
+   count = 1;
+  }
+ }
+ return result;
+}
+
+console.log(compressString(inpStr));  //a4b3c3d1
+
+/// 59 Find First Peak Element
+
+let peakEle = [1,3,4,2,5];
+
+function firstPeak(a){
+ for(let i = 1; i < a.length; i++){
+  if(a[i] > a[i-1] && a[i] > a[i+1]){
+   return a[i];
+  }
+ }
+}
+
+console.log(firstPeak(peakEle)); // 4
