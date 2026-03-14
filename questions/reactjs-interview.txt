@@ -102,7 +102,7 @@ Syntax
 const [state, dispatch] = useReducer(reducer, initialState);
 
 Example
-function reducer(state, action) {
+function CounterReducer(state, action) {
   switch (action.type) {
     case "increment":
       return { count: state.count + 1 };
@@ -112,7 +112,7 @@ function reducer(state, action) {
 }
 
 function Counter() {
-  const [state, dispatch] = useReducer(reducer, { count: 0 });
+  const [state, dispatch] = useReducer(CounterReducer, { count: 0 });
 
   return (
     <>
@@ -2832,3 +2832,150 @@ const button = React.createElement(
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(button);
+
+Controlled vs Uncontrolled Components (React Forms)
+
+Forms in React can be handled in two ways:
+
+1️⃣ Controlled Components
+2️⃣ Uncontrolled Components
+
+The difference is where the form data is stored.
+
+🔵 Controlled Components
+🔹 What?
+
+A controlled component is a form element whose value is controlled by React state.
+
+👉 React state is the single source of truth.
+
+Example
+import { useState } from "react";
+
+function Form() {
+  const [name, setName] = useState("");
+
+  const handleChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(name);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input value={name} onChange={handleChange} />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+🔹 How It Works
+
+User types → onChange triggers → setState updates → UI re-renders
+
+Flow:
+
+Input → onChange → React State → UI Update
+✅ Advantages
+
+✔ Full control over form data
+✔ Easy validation
+✔ Predictable behavior
+✔ Good for complex forms
+
+❌ Disadvantages
+
+❌ More code
+❌ Re-render on every keystroke
+
+🔴 Uncontrolled Components
+🔹 What?
+
+Form data is handled by the DOM itself, not React state.
+
+👉 Access values using refs.
+
+Example
+import { useRef } from "react";
+
+function Form() {
+  const inputRef = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(inputRef.current.value);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input ref={inputRef} />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+🔹 How It Works
+
+User types → DOM stores value → React reads using ref
+
+Flow:
+
+Input → DOM → useRef → Access Value
+✅ Advantages
+
+✔ Less code
+✔ Better performance for large forms
+✔ Works well with non-React libraries
+
+❌ Disadvantages
+
+❌ Harder validation
+❌ Less control
+❌ Not ideal for complex forms
+
+🟡 Controlled vs Uncontrolled (Comparison)
+Feature	Controlled	Uncontrolled
+Data stored in	React State	DOM
+Value access	state	ref
+Validation	Easy	Hard
+Performance	More re-renders	Faster
+Use case	Complex forms	Simple forms
+🔵 Example – Controlled Input Validation
+const [email, setEmail] = useState("");
+
+const isValid = email.includes("@");
+
+<input value={email} onChange={(e) => setEmail(e.target.value)} />
+
+{!isValid && <p>Invalid email</p>}
+
+📌 Very easy to validate
+
+🔴 Example – Uncontrolled Default Value
+<input defaultValue="Bhushan" ref={inputRef} />
+🧠 Interview Hack – Best Answer
+
+Q: What is the difference between controlled and uncontrolled components?
+
+Controlled components store form data in React state and update via onChange handlers, while uncontrolled components rely on the DOM to manage form state and access values using refs.
+
+🔥 Common Interview Questions
+Q1: Which one should you prefer?
+
+✔ Controlled components
+Because they provide better control and validation
+
+Q2: When use uncontrolled?
+
+✔ Simple forms
+✔ Performance-sensitive inputs
+✔ Integrating non-React libraries
+
+Q3: What is defaultValue?
+
+Used in uncontrolled inputs to set initial value.
+
+✅ One-Line Summary
+
+Controlled components manage form data using React state, while uncontrolled components rely on the DOM and refs to handle form inputs.

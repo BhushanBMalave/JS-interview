@@ -2097,3 +2097,163 @@ Animations (basic)
 
 🎯 One-Line Interview Answer
 setTimeout runs once after a delay, while setInterval runs repeatedly at fixed intervals until cleared.
+
+Difference Between Normal Function and Arrow Function
+🔹 1. Syntax Difference
+Normal Function
+function add(a, b) {
+  return a + b;
+}
+Arrow Function
+const add = (a, b) => {
+  return a + b;
+};
+Short Arrow Function
+const add = (a, b) => a + b;
+
+📌 Arrow functions provide shorter and cleaner syntax.
+
+🔹 2. this Keyword (MOST IMPORTANT DIFFERENCE)
+Normal Function
+
+this depends on how the function is called.
+
+const obj = {
+  name: "Bhushan",
+  greet: function () {
+    console.log(this.name);
+  }
+};
+
+obj.greet(); 
+
+Output
+
+Bhushan
+Arrow Function
+
+Arrow functions do NOT have their own this.
+They inherit this from the parent scope (lexical this).
+
+const obj = {
+  name: "Bhushan",
+  greet: () => {
+    console.log(this.name);
+  }
+};
+
+obj.greet();
+
+Output
+
+undefined
+
+📌 Because arrow functions use lexical this.
+
+🔹 3. Use as Constructor
+Normal Function
+
+Can be used with new.
+
+function Person(name) {
+  this.name = name;
+}
+
+const p = new Person("Bhushan");
+Arrow Function
+
+Cannot be used as a constructor.
+
+const Person = (name) => {
+  this.name = name;
+};
+
+const p = new Person("Bhushan"); 
+
+❌ Error
+
+🔹 4. Arguments Object
+Normal Function
+
+Has arguments.
+
+function test() {
+  console.log(arguments);
+}
+
+test(1,2,3);
+Arrow Function
+
+Does NOT have arguments.
+
+const test = () => {
+  console.log(arguments);
+};
+
+❌ Error
+
+Instead use rest operator.
+
+const test = (...args) => {
+  console.log(args);
+};
+🔹 5. Implicit Return
+
+Arrow functions can return values without return.
+
+const square = x => x * x;
+
+Normal functions require return.
+
+function square(x) {
+  return x * x;
+}
+🔹 6. Use in React
+Arrow Functions (Common in React)
+const handleClick = () => {
+  console.log("Clicked");
+};
+
+Used because:
+
+cleaner syntax
+
+lexical this
+
+Normal Functions (Common in Utility Code)
+function calculateTotal(items) {
+  return items.reduce((sum, item) => sum + item.price, 0);
+}
+🔥 Quick Comparison Table
+Feature	Normal Function	Arrow Function
+Syntax	Longer	Short
+this	Dynamic	Lexical
+Constructor	Yes	No
+arguments	Available	Not available
+React usage	Less	Very common
+🧠 Interview Best Answer (Short)
+
+The main difference between normal and arrow functions is that arrow functions use lexical this and provide a shorter syntax, while normal functions have their own this, support constructors, and have an arguments object.
+
+
+function Example() {
+  const redirectPage = () => {
+    window.location.href = "/next";
+  };
+
+  const openModal = (e) => {
+    e.stopPropagation();
+    alert("Modal Opened");
+  };
+
+  return (
+    <div onClick={redirectPage} style={{ padding: "40px", border: "1px solid" }}>
+      <p>Click anywhere to redirect</p>
+
+      <button onClick={openModal}>
+        Open Modal
+      </button>
+    </div>
+  );
+}
+This happens because of event bubbling where the button click propagates to the parent div. We can prevent this by calling event.stopPropagation() inside the button click handler so the parent click event does not trigger.
